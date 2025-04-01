@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testimonials Carousel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container94 {
+            width: 90%;
+            margin: 50px auto;
+            text-align: center;
+            position: relative;
+        }
+
+        .container94 h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .testimonials-wrapper {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .testimonials-container {
+            display: flex;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .testimonials {
+            display: flex;
+            gap: 20px;
+            flex-wrap: nowrap;
+            padding: 10px;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            text-align: center;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .testimonial-text {
+            font-size: 16px;
+            font-weight: 400;
+            color: #333;
+            padding: 10px;
+        }
+
+        .divider {
+            border-top: 1px dashed #ccc;
+            width: 80%;
+            margin: 10px auto;
+        }
+
+        .testimonial-name {
+            font-weight: 700;
+            font-size: 18px;
+            color: #757575;
+            margin-top: 10px;
+        }
+
+        .testimonial-role {
+            font-size: 14px;
+            font-weight: 700;
+            color: #1E1E1E;
+        }
+
+        /* Arrows */
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 24px;
+            z-index: 10;
+        }
+
+        .arrow-left {
+            left: 0;
+        }
+
+        .arrow-right {
+            right: 0;
+        }
+
+        .arrow:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        /* Pagination Dots */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            margin: 5px;
+            background: #bbb;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .dot.active {
+            background: #333;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .arrow {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container94">
+        <h2>What Our Clients Say</h2>
+
+        <div class="testimonials-wrapper">
+            <button class="arrow arrow-left" onclick="scrollLeft()">&#10094;</button>
+
+            <div class="testimonials-container" id="testimonial-scroll">
+                <div class="testimonials">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"This product transformed our workflow! Highly recommend it!"</p>
+                        <div class="divider"></div>
+                        <p class="testimonial-name">John Doe</p>
+                        <p class="testimonial-role">CEO, TechCorp</p>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Absolutely fantastic! The team is supportive and innovative."</p>
+                        <div class="divider"></div>
+                        <p class="testimonial-name">Jane Smith</p>
+                        <p class="testimonial-role">Marketing Director</p>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"A must-have solution for our industry. Excellent service!"</p>
+                        <div class="divider"></div>
+                        <p class="testimonial-name">Michael Brown</p>
+                        <p class="testimonial-role">Operations Manager</p>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Superb quality and great support. 10/10 experience!"</p>
+                        <div class="divider"></div>
+                        <p class="testimonial-name">Emily Wilson</p>
+                        <p class="testimonial-role">Founder, StartUpX</p>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Our clients love the results! We are very happy with the product."</p>
+                        <div class="divider"></div>
+                        <p class="testimonial-name">Robert Johnson</p>
+                        <p class="testimonial-role">Senior Consultant</p>
+                    </div>
+                </div>
+            </div>
+
+            <button class="arrow arrow-right" onclick="scrollRight()">&#10095;</button>
+        </div>
+
+        <!-- Pagination Dots -->
+        <div class="pagination" id="pagination-dots"></div>
+    </div>
+
+    <script>
+        const scrollContainer = document.getElementById('testimonial-scroll');
+        const testimonials = document.querySelector('.testimonials');
+        const dotsContainer = document.getElementById('pagination-dots');
+        let cardWidth = 370; // Width of each card + gap
+        let index = 0;
+
+        // Scroll Left
+        function scrollLeft() {
+            if (index > 0) {
+                index--;
+                updateScroll();
+            }
+        }
+
+        // Scroll Right
+        function scrollRight() {
+            let maxIndex = Math.ceil(testimonials.children.length - 3);
+            if (index < maxIndex) {
+                index++;
+                updateScroll();
+            }
+        }
+
+        // Update Scroll Position
+        function updateScroll() {
+            scrollContainer.scrollTo({
+                left: index * cardWidth,
+                behavior: 'smooth'
+            });
+            updateDots();
+        }
+
+        // Create Pagination Dots
+        function createDots() {
+            let totalDots = Math.ceil(testimonials.children.length / 3);
+            dotsContainer.innerHTML = '';
+            for (let i = 0; i < totalDots; i++) {
+                let dot = document.createElement('div');
+                dot.classList.add('dot');
+                if (i === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => {
+                    index = i;
+                    updateScroll();
+                });
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        // Update Active Dot
+        function updateDots() {
+            let dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+        }
+
+        // Initialize Dots
+        createDots();
+    </script>
+
+</body>
+</html>

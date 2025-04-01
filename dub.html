@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Scrolling Testimonials</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container94 {
+            width: 90%;
+            margin: 50px auto;
+            text-align: center;
+        }
+
+        .container94 h2 {
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 57.6px;
+            text-align: center;
+            margin-bottom: 3%;
+        }
+
+        .testimonials-container {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+
+        .testimonials {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 20px;
+            width: max-content;
+            animation: scroll 20s linear infinite;
+        }
+
+        /* Seamless scrolling effect */
+        @keyframes scroll {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 50px;
+            border-radius: 24px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            height: 250px;
+            text-align: center;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .testimonial-text {
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 22.4px;
+            color: #333;
+            padding: 0 20px;
+        }
+
+        .divider {
+            border-top: 1px dashed #ccc;
+            width: 80%;
+            margin: 10px auto;
+        }
+
+        .testimonial-name {
+            font-weight: 700;
+            font-size: 18px;
+            color: #757575;
+            margin-top: 10px;
+        }
+
+        .testimonial-role {
+            font-size: 14px;
+            font-weight: 700;
+            color: #1E1E1E;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .testimonials {
+                animation-duration: 25s; /* Slow down scrolling for smaller screens */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .testimonials {
+                animation-duration: 30s;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container94">
+        <h2>What Our Clients Say</h2>
+        <div class="testimonials-container">
+            <div class="testimonials">
+                <!-- ORIGINAL TESTIMONIALS -->
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"This product has transformed our workflow! Highly recommend it!"</p>
+                    <div class="divider"></div>
+                    <p class="testimonial-name">John Doe</p>
+                    <p class="testimonial-role">CEO, TechCorp</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Absolutely fantastic! The team is supportive and innovative."</p>
+                    <div class="divider"></div>
+                    <p class="testimonial-name">Jane Smith</p>
+                    <p class="testimonial-role">Marketing Director</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"A must-have solution for our industry. Excellent service!"</p>
+                    <div class="divider"></div>
+                    <p class="testimonial-name">Michael Brown</p>
+                    <p class="testimonial-role">Operations Manager</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Superb quality and great support. 10/10 experience!"</p>
+                    <div class="divider"></div>
+                    <p class="testimonial-name">Emily Wilson</p>
+                    <p class="testimonial-role">Founder, StartUpX</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Our clients love the results! We are very happy with the product."</p>
+                    <div class="divider"></div>
+                    <p class="testimonial-name">Robert Johnson</p>
+                    <p class="testimonial-role">Senior Consultant</p>
+                </div>
+
+                <!-- DUPLICATED TESTIMONIALS (for seamless scrolling) -->
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"This product has transformed our workflow! Highly recommend it!"</p>
+                    <div class="divider"></div>
+                    <p class="testimonial-name">John Doe</p>
+                    <p class="testimonial-role">CEO, TechCorp</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Absolutely fantastic! The team is supportive and innovative."</p>
+                    <div class="divider"></div>
+                    <p class="testimonial-name">Jane Smith</p>
+                    <p class="testimonial-role">Marketing Director</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"A must-have solution for our industry. Excellent service!"</p>
+                    <div class="divider"></div>
+                    <p class="testimonial-name">Michael Brown</p>
+                    <p class="testimonial-role">Operations Manager</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Superb quality and great support. 10/10 experience!"</p>
+                    <div class="divider"></div>
+                    <p class="testimonial-name">Emily Wilson</p>
+                    <p class="testimonial-role">Founder, StartUpX</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Our clients love the results! We are very happy with the product."</p>
+                    <div class="divider"></div>
+                    <p class="testimonial-name">Robert Johnson</p>
+                    <p class="testimonial-role">Senior Consultant</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
