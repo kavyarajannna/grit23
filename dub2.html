@@ -98,18 +98,24 @@
             cursor: pointer;
             font-size: 24px;
             z-index: 10;
+            transition: background 0.3s ease;
         }
 
         .arrow-left {
-            left: 0;
+            left: 10px; /* Make sure it’s inside */
         }
 
         .arrow-right {
-            right: 0;
+            right: 10px; /* Make sure it’s inside */
         }
 
         .arrow:hover {
             background: rgba(0, 0, 0, 0.8);
+        }
+
+        .arrow:disabled {
+            opacity: 0.3;
+            pointer-events: none;
         }
 
         /* Pagination Dots */
@@ -147,7 +153,7 @@
         <h2>What Our Clients Say</h2>
 
         <div class="testimonials-wrapper">
-            <button class="arrow arrow-left" onclick="scrollLeft()">&#10094;</button>
+            <button class="arrow arrow-left" id="left-arrow" onclick="scrollLeft()">&#10094;</button>
 
             <div class="testimonials-container" id="testimonial-scroll">
                 <div class="testimonials">
@@ -188,7 +194,7 @@
                 </div>
             </div>
 
-            <button class="arrow arrow-right" onclick="scrollRight()">&#10095;</button>
+            <button class="arrow arrow-right" id="right-arrow" onclick="scrollRight()">&#10095;</button>
         </div>
 
         <!-- Pagination Dots -->
@@ -199,10 +205,19 @@
         const scrollContainer = document.getElementById('testimonial-scroll');
         const testimonials = document.querySelector('.testimonials');
         const dotsContainer = document.getElementById('pagination-dots');
-        let cardWidth = 370; // Width of each card + gap
+        const leftArrow = document.getElementById('left-arrow');
+        const rightArrow = document.getElementById('right-arrow');
         let index = 0;
 
-        // Scroll Left
+        function updateCardWidth() {
+            return document.querySelector('.testimonial-card').offsetWidth + 20; // Includes gap
+        }
+
+        function getMaxIndex() {
+            const visibleCards = Math.floor(scrollContainer.offsetWidth / updateCardWidth());
+            return Math.max(0, Math.ceil(testimonials.children.length - visibleCards));
+        }
+
         function scrollLeft() {
             if (index > 0) {
                 index--;
@@ -210,27 +225,38 @@
             }
         }
 
-        // Scroll Right
         function scrollRight() {
-            let maxIndex = Math.ceil(testimonials.children.length - 3);
-            if (index < maxIndex) {
+            if (index < getMaxIndex()) {
                 index++;
                 updateScroll();
             }
         }
 
-        // Update Scroll Position
         function updateScroll() {
             scrollContainer.scrollTo({
-                left: index * cardWidth,
+                left: index * updateCardWidth(),
                 behavior: 'smooth'
             });
             updateDots();
+            updateArrows();
         }
 
-        // Create Pagination Dots
+        function updateArrows() {
+            if (index === 0) {
+                leftArrow.setAttribute('disabled', 'true');
+            } else {
+                leftArrow.removeAttribute('disabled');
+            }
+
+            if (index >= getMaxIndex()) {
+                rightArrow.setAttribute('disabled', 'true');
+            } else {
+                rightArrow.removeAttribute('disabled');
+            }
+        }
+
         function createDots() {
-            let totalDots = Math.ceil(testimonials.children.length / 3);
+            let totalDots = getMaxIndex() + 1;
             dotsContainer.innerHTML = '';
             for (let i = 0; i < totalDots; i++) {
                 let dot = document.createElement('div');
@@ -244,7 +270,6 @@
             }
         }
 
-        // Update Active Dot
         function updateDots() {
             let dots = document.querySelectorAll('.dot');
             dots.forEach((dot, i) => {
@@ -252,8 +277,20 @@
             });
         }
 
-        // Initialize Dots
+        // Recalculate on resize
+        window.addEventListener('resize', () => {
+            index = 0;
+            createDots();
+            updateScroll();
+        });
+
+        // Initialize
         createDots();
+        updateArrows();
+
+        // Add event listeners
+        leftArrow.addEventListener('click', scrollLeft);
+        rightArrow.addEventListener('click', scrollRight);
     </script>
 
 </body>
