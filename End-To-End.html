@@ -1,0 +1,1948 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>End To End Solutions</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+
+    <link rel="icon" type="image/png" href="header.jpg"> <!-- Favicon -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+
+
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        html,
+        body {
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: transparent;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            z-index: 1000;
+        }
+
+        header.scrolled {
+            background-color: white;
+            color: black;
+        }
+
+        header.scrolled nav a {
+            color: black;
+        }
+
+        .menu-icon {
+            display: none;
+            font-size: 30px;
+            cursor: pointer;
+            color: white;
+            /* Default color before scrolling */
+            transition: color 0.3s ease;
+            /* Smooth transition */
+        }
+
+        header.scrolled .menu-icon {
+            color: black;
+            /* Change to black when scrolled */
+        }
+
+
+
+
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        nav a {
+            font-weight: 400;
+            margin: 0 15px;
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+            line-height: 24px;
+            position: relative;
+        }
+
+        nav a:hover::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -3px;
+            width: 100%;
+            height: 2px;
+            background-color: #5107B8;
+        }
+
+        nav a.cta-button {
+            background-color: #5107B8;
+            color: white !important;
+            padding: 10px 20px;
+            font-weight: 900;
+            font-size: 14px;
+            line-height: 16.8px;
+            letter-spacing: 20%;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease-in-out;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        /* Smooth Scale Effect */
+        nav a.cta-button:hover {
+            transform: scale(1.05) translateY(-2px);
+        }
+
+        /* Sliding Effect */
+        nav a.cta-button::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            top: 0;
+            left: -100%;
+            transition: left 0.3s ease-in-out;
+        }
+
+        nav a.cta-button:hover::after {
+            left: 100%;
+        }
+
+        /* Subtle Press Effect */
+        nav a.cta-button:active {
+            transform: scale(0.95);
+        }
+
+
+        @media (max-width: 768px) {
+            header {
+                padding: 10px 20px;
+            }
+
+            .menu-icon {
+                display: block;
+
+            }
+
+            #nav-menu {
+                position: fixed;
+                top: 0;
+                right: 0;
+                background-color: white;
+                height: 100%;
+                width: 250px;
+                transform: translateX(100%);
+                transition: transform 0.3s ease;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 20px;
+            }
+
+            #nav-menu a {
+                color: black;
+                margin-bottom: 20px;
+            }
+
+            #nav-menu.open {
+                transform: translateX(0);
+            }
+
+            .close-menu {
+                font-size: 30px;
+                color: black;
+                cursor: pointer;
+                position: absolute;
+                top: 20px;
+                right: 20px;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .close-menu {
+                display: none;
+            }
+        }
+
+        /* Hide home icon on mobile, show text */
+        @media (max-width: 768px) {
+            .desktop-home {
+                display: none;
+            }
+        }
+
+        /* Hide home text on desktop, show icon */
+        @media (min-width: 769px) {
+            .mobile-home {
+                display: none;
+            }
+        }
+
+
+
+
+
+
+        /* Keep original design */
+        .container-heading,
+        h2 {
+            opacity: 0;
+            transform: translateY(20px);
+            /* Smooth entry */
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        /* Reveal effect */
+        .container-heading.reveal,
+        h2.reveal {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+
+
+
+
+        .hero-section {
+            text-align: center;
+            position: relative;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 20px;
+            padding-bottom: 60px;
+            padding-left: 10%;
+            padding-right: 20%;
+
+            /* Add a black gradient at the top */
+            background: linear-gradient(to bottom, rgb(0 0 0 / 93%) 0%, rgba(0, 0, 0, 0) 40%);
+        }
+
+
+        .hero-background img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .hero-section h1,
+        .hero-section h3,
+        .hero-section p {
+            opacity: 0;
+            /* Initially hidden */
+            transform: translateY(30px);
+            /* Move down initially */
+            animation: fadeInUp 1.2s ease-out forwards;
+            /* Smooth reveal */
+        }
+
+        .hero-section h1 {
+            text-shadow: 2px 2px 4px rgb(0, 0, 0);
+            text-align: left;
+            color: white;
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 120%;
+            letter-spacing: -2%;
+        }
+
+        .hero-section p {
+            text-shadow: 2px 2px 4px rgb(0, 0, 0);
+            line-height: 24px;
+            font-weight: 400;
+            text-align: left;
+            color: white;
+            margin-top: 10px;
+            font-size: 20px;
+            opacity: 0.8;
+        }
+
+        /* Keyframes for Text Reveal Effect */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .hero-section {
+                padding-right: 10%;
+                /* Reduce right padding for smaller screens */
+            }
+
+            .hero-section h1 {
+                font-size: 32px;
+                line-height: 40px;
+            }
+
+            .hero-section p {
+                font-size: 16px;
+                line-height: 22px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-section {
+                padding-right: 8%;
+                /* Further reduce right padding for mobile */
+            }
+
+            .hero-section h1 {
+                font-size: 28px;
+                line-height: 36px;
+            }
+
+            .hero-section p {
+                font-size: 14px;
+                line-height: 20px;
+            }
+        }
+
+
+
+
+        .demo-button {
+            background-color: #7e00ff;
+            color: white;
+            padding: 15px 40px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+
+
+        .container {
+            padding: .5% 5%;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            /* 3 boxes per row */
+            gap: 20px;
+        }
+
+        .container-heading {
+            margin-top: 80px;
+            text-align: left;
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: #5107B8;
+            line-height: 120%;
+  letter-spacing: -2%;
+
+            padding-left: 5%;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .card h2 {
+            color: #000000;
+            font-size: 16px;
+            font-weight: 700;
+            /* font-family: "Bower", Georgia, "Times New Roman", serif; */
+            line-height: 22.4px;
+            margin-bottom: 10px;
+        }
+
+        /* a. and b. formatting with left gap */
+        .card .section {
+            line-height: 140%;
+            font-size: 16px;
+            font-weight: 400;
+            display: flex;
+            /* gap: 10px; */
+            margin-bottom: 5px;
+            padding-left: 20px;
+
+            /* Adds left space */
+        }
+
+        .card .content {
+            padding-left: 40px;
+            /* More indentation */
+            margin-bottom: 10px;
+        }
+
+        .card .section b {
+            font-weight: bold;
+            min-width: 25px;
+            /* Ensures alignment */
+        }
+
+        /* Roman numeral list */
+        .card ul {
+            padding-left: 65px;
+            /* Aligns Roman numerals under b. */
+        }
+
+        .card ul.hello {
+            padding-left: 35px;
+            /* Aligns Roman numerals under b. */
+        }
+
+        .card ul.roman {
+            list-style-type: lower-roman;
+            /* Uses Roman numerals */
+        }
+
+        .card ul.hello li {
+            line-height: 140%;
+            font-size: 16px;
+            font-weight: 400;
+            /* font-family: "McKinsey Sans", "Helvetica Neue", Calibri, Corbel, Helvetica, Roboto, Droid, sans-serif; */
+            margin-bottom: 8px;
+        }
+
+        .card ul.roman li {
+            line-height: 22.4px;
+            font-size: 16px;
+            font-weight: 400;
+            margin-bottom: 8px;
+        }
+
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: repeat(2, 1fr);
+                /* 2 boxes per row on tablets */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                /* 1 box per row on mobile */
+            }
+        }
+
+        .section2 {
+
+            padding: .5% 5%;
+        }
+
+        .container2 {
+            width: 100%;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            padding: 40px 0;
+        }
+
+        .card2 {
+            background: white;
+            padding: 5%;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        h2 {
+            color: #5107B8;
+            font-size: 24px;
+            font-weight: 800;
+            /* font-family: "Bower", Georgia, "Times New Roman", serif; */
+            line-height: 28.8px;
+            margin-bottom: 1rem;
+            margin-top: 0;
+            min-height: 40px;
+        }
+
+        .card2 ul {
+            padding-left: 20px;
+        }
+
+        .card2 ul li {
+            line-height: 30.4px;
+            font-size: 16px;
+            font-weight: 400;
+            /* font-family: "McKinsey Sans", "Helvetica Neue", Calibri, Corbel, Helvetica, Roboto, Droid, sans-serif; */
+        }
+
+
+        @media (max-width: 768px) {
+            .container2 {
+                width: 100%;
+                /* Ensure full width */
+
+                grid-template-columns: 1fr;
+                /* Single column layout */
+            }
+
+            .card2 {
+                padding: 5%;
+                /* Keep internal padding */
+            }
+
+
+        }
+
+
+        .container23 {
+            padding: 5%;
+        }
+
+        .header-section23 {
+            border-left: 16px solid #5107B8;
+            padding-left: 10px;
+        }
+
+
+        .header-section23 h1 {
+            padding: 1%;
+            color: #5107B8;
+            font-size: clamp(48px, 3vw, 3.25rem);
+            /* font-family: "Bower", Georgia, "Times New Roman", serif; */
+            font-weight: 700;
+            line-height: 120%;
+            letter-spacing: -2%;
+        }
+
+        .italic-text {
+
+
+            font-size: clamp(1rem, 1.5vw, 1.25rem);
+        }
+
+        .header-section23 p {
+            padding: 1%;
+            text-align: left;
+            color: #000000;
+            font-size: 16px;
+            /* font-family: "Bower", Georgia, "Times New Roman", serif; */
+            font-weight: 400;
+            line-height: 120%;
+        }
+
+        .future-proof-section {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 516px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .future-proof-section .container60 {
+            background-color: #f5f5f5;
+            padding: 20px;
+            max-width: 90%;
+        }
+
+        .future-proof-section .headline60 {
+            font-weight: 900;
+            line-height: 1.2;
+            font-size: 32px;
+            color: #000000;
+        }
+
+        .future-proof-section .headline60 span {
+            display: block;
+        }
+
+        .future-proof-section .button60 {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #5107B8;
+            color: white;
+            width: 432px;
+            height: 72px;
+            font-size: 14px;
+            font-weight: 900;
+            text-transform: uppercase;
+            border-radius: 4px;
+            margin-top: 30px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s, color 0.3s, border 0.3s;
+            gap: 30px;
+            border: 2px solid #5107B8;
+        }
+
+        .future-proof-section .button60:hover {
+            background-color: white;
+            color: #5107B8;
+            border: 2px solid #5107B8;
+        }
+
+        .future-proof-section .button60 .arrow {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .future-proof-section .button60:hover .arrow {
+            transform: translateX(5px);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .future-proof-section {
+                height: auto;
+                padding: 15px;
+            }
+
+            .future-proof-section .headline60 {
+                font-size: 5vw;
+            }
+
+            .future-proof-section .button60 {
+                font-size: 4vw;
+                padding: 10px 20px;
+                width: 80%;
+                height: auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .future-proof-section {
+                height: auto;
+                padding: 10px;
+            }
+
+            .future-proof-section .container60 {
+                max-width: 100%;
+            }
+
+            .future-proof-section .headline60 {
+                font-size: 6vw;
+            }
+
+            .future-proof-section .button60 {
+                font-size: 3.5vw;
+                width: 100%;
+                height: auto;
+            }
+        }
+
+
+
+
+        .footer {
+            padding: 0 5%;
+            padding-top: 4%;
+
+        }
+
+        .footer hr {
+            border: 0;
+            height: 1px;
+            background: #ccc;
+            margin-bottom: 20px;
+        }
+
+        .footer-container {
+
+            padding-top: 3%;
+            padding-bottom: 3%;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+            padding: 0 20px;
+        }
+
+        .footer-text {
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 1.5rem;
+            color: black;
+            text-align: left;
+        }
+
+        .footer-text a {
+            display: block;
+            text-decoration: none;
+            font-size: 32px;
+            color: black;
+            width: 60px;
+            text-align: left;
+            margin-top: 10px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-size: 14px;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: black;
+            display: flex;
+            font-weight: 600;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 16px;
+            line-height: 2.5rem;
+            position: relative;
+            /* Needed for pseudo-elements */
+            transition: color 0.3s ease-in-out;
+        }
+
+        /* Right arrow */
+        .footer-links a::after {
+            content: " ➡";
+            /* Space before the arrow for spacing */
+            color: black;
+            font-size: 16px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        /* Bottom line animation */
+        .footer-links a::before {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            width: 0%;
+            height: 2px;
+            background-color: #5107B8;
+            transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
+        }
+
+        /* Hover effects */
+        .footer-links a:hover {
+            color: #5107B8;
+        }
+
+        .footer-links a:hover::after {
+            transform: translateX(5px);
+            /* Moves arrow slightly to the right */
+            color: #5107B8;
+        }
+
+        .footer-links a:hover::before {
+            width: 100%;
+            left: 0;
+        }
+
+
+        .footer-column:nth-child(2) {
+            flex: 0 0 150px;
+            /* Adjust the width of the second column */
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 25px;
+            padding-bottom: 4%;
+        }
+
+        .social-icons a {
+            position: relative;
+            /* Needed for absolute positioning of ::after */
+            color: black;
+            font-size: 24px;
+            transition: color 0.3s ease-in-out;
+            text-decoration: none;
+        }
+
+        /* Hover color change */
+        .social-icons a:hover {
+            color: #5107B8;
+        }
+
+        /* Adding the bottom line effect */
+        .social-icons a::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: -5px;
+            /* Position below the icon */
+            width: 0%;
+            height: 2px;
+            background-color: #5107B8;
+            transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
+        }
+
+        /* Expand line on hover */
+        .social-icons a:hover::after {
+            width: 100%;
+            left: 0;
+        }
+
+
+        .contact-info {
+            padding-bottom: 3%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            font-size: 14px;
+        }
+
+        .contact-info i {
+            margin-right: 8px;
+            color: #000000;
+        }
+
+        .contact-info a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        .contact-info a:hover {
+            color: #5107B8;
+        }
+
+        .contact-info p {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .certified-trusted {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .certified,
+        .trusted {
+            /* flex: 1; */
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding-top: 16.5%;
+        }
+
+        .certified p,
+        .trusted p {
+            font-size: 16px;
+
+            margin-bottom: 10px;
+        }
+
+        .trusted-images {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 768px) {
+            .certified-trusted {
+                flex-direction: column;
+                /* Stack items vertically */
+                align-items: flex-start;
+                /* Align items to the left */
+                gap: 20px;
+            }
+
+            .certified {
+                text-align: left;
+                align-items: flex-start;
+                width: 100%;
+            }
+
+            .certified img {
+                max-width: 100px;
+                /* Adjust size if needed */
+            }
+
+            .trusted {
+                text-align: center;
+                align-items: center;
+                width: 100%;
+            }
+
+            .trusted-images {
+                display: flex;
+                flex-wrap: nowrap;
+                /* Prevent wrapping */
+                overflow-x: auto;
+                /* Enable horizontal scrolling if needed */
+                gap: 10px;
+                justify-content: flex-start;
+                /* Align images to the left */
+                white-space: nowrap;
+                /* Ensure images stay in one row */
+                padding-bottom: 5px;
+                /* Prevent cut-off on small screens */
+            }
+
+            .trusted-images img {
+                max-width: 80px;
+                /* Adjust image size if necessary */
+                height: auto;
+                flex-shrink: 0;
+                /* Prevent images from shrinking */
+            }
+        }
+
+
+        .vertical-line {
+            min-height: 80px;
+            /* Ensures the line is visible */
+            width: 2px;
+            background: #ccc;
+            display: inline-block;
+        }
+
+        .location-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 18px;
+            /* Adjust spacing */
+            padding-top: 7%;
+            flex-wrap: wrap;
+            /* Allows wrapping on smaller screens */
+        }
+
+
+        .location {
+            color: #757575;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            padding: 10px;
+        }
+
+        .location img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+
+            padding: 8px;
+            margin-bottom: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+
+        }
+
+
+
+
+
+        .footer-bottom {
+            display: flex;
+            flex-wrap: wrap;
+            /* Allows wrapping on smaller screens */
+            justify-content: space-between;
+            align-items: center;
+            padding-left: 5%;
+            padding-right: 5%;
+            padding-top: 10px;
+            padding-bottom: 5%;
+
+            font-size: 14px;
+            color: #666;
+
+        }
+
+        .footer-links-bottom {
+            display: flex;
+            flex-wrap: wrap;
+            /* Allows links to wrap if needed */
+            gap: 10px;
+        }
+
+        .footer-links-bottom a {
+            text-decoration: none;
+            color: black;
+            font-size: 16px;
+            margin: 0 10px;
+            white-space: nowrap;
+            font-weight: 400;
+            /* Prevents links from breaking into two lines */
+        }
+
+        .footer-links-bottom a:hover {
+            color: #000;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .footer-bottom {
+                flex-direction: column;
+                /* Stack items on smaller screens */
+                text-align: center;
+                gap: 10px;
+            }
+
+            .footer-links-bottom {
+                justify-content: center;
+            }
+        }
+
+
+        @media (max-width: 768px) {
+            .footer-container {
+                flex-direction: column;
+            }
+
+            .footer-links {
+                padding-left: 0;
+                padding-right: 0;
+                text-align: center;
+            }
+
+            .footer-links-bottom {
+                flex-wrap: nowrap;
+                /* Prevents wrapping */
+                justify-content: center;
+                gap: 5px;
+                /* Adjust spacing between links */
+            }
+
+            .footer-links-bottom a {
+                text-decoration: none;
+                color: black;
+                font-size: 12px;
+                margin: 0 1px;
+                white-space: nowrap;
+            }
+
+            .certified-trusted {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .trusted {
+                align-items: flex-start;
+            }
+        }
+
+        .mobile-only {
+            display: none;
+            /* Hide by default */
+        }
+
+        @media screen and (max-width: 768px) {
+            .mobile-only {
+                display: block;
+                /* Show only on mobile */
+            }
+        }
+        .digitaltwins-container {
+            max-width: 100%;
+            margin: auto;
+            padding: 5%;
+        }
+
+        .digitaltwins-section-title {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: 800;
+            line-height: 28.8px;
+            color: #5107B8;
+            margin-bottom: 20px;
+        }
+
+        /* Cards Layout */
+        .digitaltwins-cards {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            /* padding: 5%; */
+        }
+
+        .digitaltwins-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            flex: 1;
+            /* min-width: 300px; */
+        }
+
+        .digitaltwins-card h3 {
+            font-size: 16px;
+            line-height: 22.4px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .digitaltwins-card ul {
+            padding-left: 20px;
+        }
+
+        .digitaltwins-card ul li {
+            line-height: 30.4px;
+            font-size: 16px;
+            font-weight: 400;
+            margin-bottom: 5px;
+        }
+
+        /* Benefits Section */
+        .digitaltwins-benefits {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+        }
+
+        .digitaltwins-benefits-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .digitaltwins-benefit {
+            flex: 1;
+            min-width: 250px;
+            position: relative;
+            padding-right: 20px;
+        }
+
+        .digitaltwins-benefit h4 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .digitaltwins-benefit p {
+            font-size: 16px;
+            font-weight: 400;
+            margin: 0;
+        }
+
+        /* Vertical Line between Benefits */
+        .digitaltwins-benefit:not(:last-child)::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            width: 1px;
+            background-color: #ccc;
+        }
+
+        .digitaltwins-card b{
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 22.4px;
+        }
+        .digitaltwins-card p{
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 22.4px;
+        }
+        .digitaltwins-card ul{
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 22.4px;
+        }
+
+       
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .digitaltwins-cards {
+                flex-direction: column;
+                /* padding: 5%; */
+            }
+
+            .digitaltwins-benefits-container {
+                flex-direction: column;
+            }
+
+            .digitaltwins-benefit {
+                padding: 20px 0; /* Add padding for spacing */
+                text-align: center;
+            }
+
+            .digitaltwins-benefit:not(:last-child)::after {
+                width: 100%;
+                height: 1px;
+                top: auto;
+                bottom: 0;
+                right: auto;
+                left: 0;
+            }
+        }
+    .digitaltwins-section-title, .digitaltwins-card h3,.digitaltwins-benefits h3 {
+            opacity: 0;
+            transform: translateY(20px);
+            /* Smooth entry */
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        /* Reveal effect */
+        .digitaltwins-section-title.reveal, .digitaltwins-card h3.reveal,.digitaltwins-benefits h3.reveal {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+    </style>
+</head>
+
+<body>
+    <header id="header">
+        <div class="logo">
+            <a href="index.html"><img id="logo" src="hel.png" alt="Gritbyte Labs Logo" height="40"></a>
+        </div>
+        <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+        <nav id="nav-menu">
+            <div class="close-menu" onclick="toggleMenu()">×</div>
+            <a href="index.html" class="desktop-home"><i class="fas fa-home"></i></a>
+            <a href="index.html" class="mobile-only">Home</a>
+            <a href="Product.html">Products</a>
+            <a href="Solutions.html">Solutions</a>
+            <a href="Blog.html">Blog</a>
+            <a href="CaseStudy.html">Case Studies</a>
+            <a href="Contact.html">Contact Us</a>
+            <a href="Contact.html" class="cta-button">GET IN TOUCH</a>
+        </nav>
+    </header>
+
+    <section class="hero-section">
+        <div class="hero-background">
+            <img src="endtoendheader.png" alt="Hero Background">
+        </div>
+        <h1>End – to – End Solutions</h1>
+        <p id="currentDate"></p>
+
+
+    </section>
+
+    <div class="container23">
+        <div class="header-section23">
+            <h1>Cutting-Edge Extended Reality (XR) Solutions</h1>
+            <p class="italic-text">Extended Reality (XR) is transforming industries by creating immersive, interactive,
+                and scalable digital experiences that drive engagement, <br>efficiency, and innovation. At Gritbyte
+                Labs, we
+                specialize in delivering next-gen AR, VR, and MR solutions that empower businesses across <br>multiple
+                domains with state-of-the-art technology. </p>
+        </div>
+
+    </div>
+    <div class="container-wrapper">
+        <h1 class="container-heading">Our XR Offerings</h1>
+        <div class="container">
+            <div class="card">
+                <h2 style="font-weight: 100;"><strong>1. Immersive Training Modules : </strong> Leverage hyper-realistic
+                    simulations to enhance
+                    employee preparedness for complex and high-stakes environments.</h2>
+                <p class="section"><b>a.</b> <strong>Aviation:</strong> AI-powered emergency drills, real-time flight
+                    procedure training.</p>
+                <p class="section"><b>b.</b> <strong>Healthcare:</strong> Hands-on surgical simulations, real-world
+                    medical device interactions.</p>
+                <p class="section"><b>b.</b> <strong>Manufacturing:</strong> Hands-on surgical simulations, real-world
+                    medical device interactions. </p>
+
+            </div>
+
+            <div class="card">
+                <h2>2. Virtual Product Showrooms: </h2>
+                <p class="section"><b>a.</b> Elevate customer engagement with interactive 3D environments and real-time
+                    product customizations.</p>
+                <p class="section"><b>b.</b> Industries:</p>
+                <ul class="roman">
+                    <li><strong>Retail:</strong> AR-driven virtual try-ons, personalized shopping experiences. </li>
+                    <li><strong>Automotive:</strong> Immersive car showrooms with real-time customization and AI-guided
+                        assistance. </li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2>3. Simulation Platforms:</h2>
+                <p class="section"><b>a.</b> Develop high-fidelity virtual environments for risk-free testing,
+                    analytics, and operational optimization.</p>
+                <p class="section"><b>b.</b> Applications:</p>
+                <ul class="roman">
+                    <li><strong>Defence:</strong> Advanced tactical simulations, AI-enhanced combat training. </li>
+                    <li><strong>Education:</strong> Interactive classrooms, AI-integrated virtual labs. </li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2>4. Gamified Learning Experiences: </h2>
+                <p class="section">Incorporate game mechanics, adaptive AI, and
+                    real-time feedback to drive knowledge retention and engagement.</p>
+
+            </div>
+
+            <div class="card">
+                <h2>5. Benefits</h2>
+                <p class="section"><b>a.</b> Increased learning efficiency through interactive storytelling.</p>
+                <p class="section"><b>b.</b> Higher engagement using AI-powered personalized learning paths.</p>
+
+            </div>
+
+            <div class="card">
+                <h2>6. Cross-Platform & AI-Integrated Solutions: </h2>
+                <p class="section">Build seamless, high-performance XR
+                    applications
+                    optimized for VR headsets, AR-enabled mobile devices, immersive LED walls, and cloud-based
+                    platforms.</p>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container-wrapper">
+        <h1 class="container-heading">Unleashing the Power of XR & AI for Businesses</h1>
+        <div class="container">
+            <div class="card">
+                <h2>1. Value to Clients </h2>
+
+                <ul class="hello">
+                    <li><strong>a.Enhanced Training Outcomes: </strong> Immerse employees in hyper-realistic, risk-free
+                        simulations that accelerate skill acquisition, boost retention, and slash training costs.</li>
+                    <li><strong>b. Next-Level Customer Engagement:</strong> Captivate audiences with interactive virtual
+                        showrooms and immersive brand experiences that drive higher purchase intent and long-term
+                        loyalty.</li>
+                    <li><strong>c. Optimized Operational Efficiency:</strong> Streamline workflows and cut costs with
+                        AI-driven XR simulations, minimizing dependence on physical setups and maximizing resource
+                        utilization.</li>
+
+                </ul>
+            </div>
+
+
+
+
+            <div class="card">
+                <h2>2. Industries Transforming with XR: </h2>
+
+                <ul class="hello">
+                    <li><strong>Aviation:</strong> AR-driven virtual try-ons, personalized shopping experiences.</li>
+                    <li><strong>Healthcare:</strong> AI-powered surgical simulations, interactive patient education.
+                    </li>
+                    <li><strong>Retail:</strong> Virtual storefronts, 360° product customization.</li>
+                    <li><strong>Education:</strong> Immersive learning platforms for enhanced knowledge retention. </li>
+                    <li><strong>Manufacturing:</strong> Digital twins, hands-on equipment training.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2>3. Key Stats:</h2>
+
+                <ul class="hello">
+                    <li><strong>30% Faster Learning:</strong> AI-enhanced XR solutions improve knowledge retention and
+                        skill mastery. </li>
+                    <li><strong>40% Cost Reduction:</strong> Reduce physical training expenses and logistics overhead
+                        with scalable virtual environments. </li>
+
+                </ul>
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+    <div class="container23">
+        <div class="header-section23">
+            <h1>Cutting-Edge <br>Generative AI Solutions</h1>
+            <p class="italic-text">Generative AI is revolutionizing how businesses automate, optimize, and innovate. At
+                Gritbyte Labs, we harness state-of-the-art AI technologies to enhance efficiency, personalize user
+                experiences, and unlock unprecedented growth opportunities for our clients.</p>
+        </div>
+
+    </div>
+    <div class="container-wrapper">
+        <h1 class="container-heading">Our Generative AI Offerings</h1>
+        <div class="container">
+            <div class="card">
+                <h2>1. AI-Powered Chatbots & Virtual Assistants:</h2>
+                <p class="section"><b>a.</b> Enhance customer engagement with intelligent, human-like AI agents that
+                    automate interactions, boost satisfaction, and drive conversions.</p>
+                <p class="section"><b>b.</b> Key Features:</p>
+                <ul class="roman">
+                    <li>24/7 real-time support for seamless customer experiences.</li>
+                    <li>Multilingual capabilities for global audience reach.</li>
+                    <li>Adaptive learning for context-aware conversations.</li>
+                </ul>
+                <p class="section"><b>c.</b> Industry Applications:</p>
+                <ul class="roman">
+                    <li><strong>Retail:</strong> AI-driven shopping assistants for hyper-personalized recommendations. 
+                    </li>
+                    <li><strong>Healthcare:</strong> Smart assistants for automated patient queries & appointment
+                        scheduling.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2>2. Predictive Analytics for Data-Driven Decisions:</h2>
+                <p class="section"><b>a.</b> Leverage AI-powered insights to analyze historical trends, forecast
+                    opportunities, and mitigate risks.</p>
+                <p class="section"><b>b.</b> Applications across Industries:</p>
+                <ul class="roman">
+                    <li><strong>Manufacturing:</strong> Optimize supply chains, production workflows, and demand
+                        forecasting. </li>
+                    <li><strong>Real Estate:</strong> Predict market trends, investment opportunities, and pricing
+                        strategies with AI-driven analytics. </li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2>3. Hyper-Personalised Experiences:</h2>
+                <p class="section"><b>a.</b> Deliver tailored recommendations and dynamic content generation that boost
+                    engagement, drive conversions, and enhance user satisfaction.</p>
+                <p class="section"><b>b.</b> Examples:</p>
+                <ul class="roman">
+                    <li><strong>E-Commerce:</strong> AI-powered product suggestions based on real-time user behavior. 
+                    </li>
+                    <li><strong>Media:</strong> Personalized content curation for news, streaming, and digital
+                        platforms </li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2>4. Intelligent Process Automation:</h2>
+                <p class="section"><b>a.</b> Eliminate manual inefficiencies with AI-driven workflow automation,
+                    optimizing productivity and accuracy.</p>
+
+                <ul class="roman">
+                    <li><strong>Benefits:</strong> Automate repetitive tasks like <strong>data entry, inventory
+                            management,</strong> and <strong>reporting</strong>.</li>
+                    <li>Free up resources for <strong>high-impact, strategic initiatives</strong>.</li>
+                    <li>Reduce operational errors, ensuring <strong>seamless business processes.</strong>.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2>5. AI-Powered Dynamic Content Generation:</h2>
+                <p class="section"><b>a.</b> Scale content creation effortlessly with AI-generated text, visuals, and
+                    marketing assets.</p>
+                <p class="section"><b>b.</b> Industries:</p>
+                <ul class="roman">
+                    <li><strong>Retail:</strong> Bulk product descriptions and automated catalog updates.</li>
+                    <li><strong>Tourism & Hospitality:</strong> AI-curated travel itineraries and destination guides.
+                    </li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2>6. Smart Recommendation Engines:</h2>
+                <p class="section"><b>a.</b> Deliver real-time, AI-powered suggestions to enhance user engagement and
+                    increase revenue.</p>
+                <p class="section"><b>b.</b> Examples:</p>
+                <ul class="roman">
+                    <li><strong>Streaming Platforms:</strong> AI-driven content suggestions for hyper-personalized
+                        viewing. </li>
+                    <li><strong>E-Commerce:</strong> Smart upselling with context-aware complementary product
+                        recommendations. </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="section2">
+        <div class="container2">
+            <div class="card2">
+                <h2>Unlocking Business Potential with Generative AI</h2>
+                <ul>
+                    <li><strong>Enhanced Efficiency:</strong> Automate workflows, optimize resources, and drive cost
+                        savings at scale.</li>
+                    <li><strong>Improved Decision-Making:</strong> Leverage AI-driven analytics and predictive insights
+                        for data-backed strategies that maximise ROI.</li>
+                    <li><strong>Personalized Experiences:</strong> Built with enterprise-grade security protocols to
+                        protect
+                        sensitive data.</li>
+                    <li><strong>Customization:</strong> Deliver tailored interactions that boost customer satisfaction,
+                        retention, and brand loyalty.</li>
+                </ul>
+            </div>
+            <div class="card2">
+                <h2>Industries Transforming with Generative AI</h2>
+                <ul>
+                    <li><strong>Healthcare:</strong> AI-powered diagnostics, virtual health assistants, and automated
+                        patient support.
+                    </li>
+                    <li><strong>Retail:</strong> Personalized shopping experiences, intelligent chatbots, and AI-driven
+                        product recommendations.</li>
+                    <li><strong>Education:</strong> Adaptive learning platforms, AI tutors, and smart content
+                        generation.
+                    </li>
+                    <li><strong>Manufacturing:</strong> Predictive maintenance, AI-enhanced inventory optimization, and
+                        process automation.
+                    </li>
+                    <li><strong>Media and Entertainmen:</strong> AI-driven content curation, dynamic storytelling, and
+                        automated media production.
+                    </li>
+                </ul>
+            </div>
+            <div class="card2">
+                <h2>Industries Transforming with Generative AI</h2>
+                <ul>
+                    <li><strong>40% Cost Savings</strong> Businesses that adopt AI reduce operational costs
+                        significantly.</li>
+                    <li><strong>70% Customer Retention:</strong>Personalized AI interactions boost loyalty and
+                        engagement.</li>
+                </ul>
+            </div>
+            <div class="card2">
+                <h2>Case Study: AI-Powered Retail Transformation </h2>
+                <ul>
+                    <li><strong>Challenge:</strong>A global retail chain needed to enhance customer engagement and
+                        streamline support operations. </li>
+                    <li><strong>Solution:</strong> Implemented AI-driven chatbots to deliver instant, human-like
+                        interactions and personalized shopping assistance. </li>
+
+                </ul>
+            </div>
+        </div>
+        <hr>
+    </div>
+
+
+
+    <div class="container23">
+        <div class="header-section23">
+            <h1>Scalable SaaS Development</h1>
+            <p class="italic-text">In today’s digital-first world, businesses need agile, scalable, and secure platforms
+                to streamline operations, enhance customer engagement, and drive revenue growth. At Gritbyte Labs, we
+                craft next-gen SaaS solutions, delivering high-performance cloud-based platforms tailored to your
+                business needs.</p>
+        </div>
+
+    </div>
+    <div class="container-wrapper">
+        <h1 class="container-heading">Our SaaS Development Offerings</h1>
+        <div class="container">
+            <div class="card">
+                <h2>1. Custom SaaS Platforms:</h2>
+                <p class="section"><b>a.</b> Design and build scalable, cloud-native solutions that solve complex
+                    business challenges.</p>
+                <p class="section"><b>b.</b> Examples: :</p>
+                <ul class="roman">
+                    <li><strong>E-Commerce:</strong> Scalable online store platforms with AI-driven analytics and
+                        seamless CRM integration. </li>
+                    <li><strong>Healthcare:</strong> Telemedicine platforms and AI-powered patient management systems. 
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div class="card">
+                <h2>2. Smart Learning Management Systems (LMS):</h2>
+                <p class="section"><b>a.</b> Develop feature-rich, AI-enhanced LMS platforms for educational
+                    institutions and corporate training.</p>
+                <p class="section"><b>b.</b> Features:</p>
+                <ul class="roman">
+                    <li>Multi-language support for global accessibility.</li>
+                    <li>Real-time analytics for progress tracking and adaptive learning.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2>3. AI-Driven Enterprise Resource Planning (ERP) Systems:</h2>
+                <p class="section"><b>a.</b> Optimise and automate core business processes with advanced ERP solutions.
+                </p>
+                <p class="section"><b>b.</b> Applications:</p>
+                <ul class="roman">
+                    <li><strong>Inventory Management:</strong> Real-time tracking, AI-powered forecasting.
+                    </li>
+                    <li><strong>Financial Planning:</strong> Automated budgeting, smart expense management, and dynamic
+                        reporting.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2>4. Intelligent Customer Relationship Management (CRM) Systems:</h2>
+                <p class="section"><b>a.</b> Elevate customer experiences with data-driven CRM solutions.</p>
+                <p class="section"><b>b.</b> Features:</p>
+                <ul class="roman">
+                    <li>AI-powered lead tracking and engagement automation.</li>
+                    <li>Predictive analytics for sales forecasting and retention strategies.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2>5. API Integration and Development:</h2>
+                <p class="section"><b>a.</b> Seamlessly connect your ecosystem with powerful API solutions.</p>
+                <p class="section"><b>b.</b> Examples:</p>
+                <ul class="roman">
+                    <li>Payment gateways for frictionless transactions.</li>
+                    <li>Social media and IoT integrations for enhanced connectivity.
+                    </li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2>6. Cloud-Native Applications:</h2>
+                <p class="section"><b>a.</b> Build secure, scalable, and globally accessible SaaS solutions.</p>
+                <p class="section"><b>b.</b> Benefits:</p>
+                <ul class="roman">
+                    <li>Reduced infrastructure costs with cloud-based deployment.</li>
+                    <li>Enhanced collaboration and accessibility across teams.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="section2">
+        <div class="container2">
+            <div class="card2">
+                <h2>Value to Clients</h2>
+                <ul>
+                    <li><strong>Scalability:</strong> Solutions that grow with your business needs without compromising
+                        performance.</li>
+                    <li><strong>Cost Efficiency:</strong> Reduce infrastructure costs with cloud-based platforms.</li>
+                    <li><strong>Enhanced Security:</strong> Built with enterprise-grade security protocols to protect
+                        sensitive data.</li>
+                    <li><strong>Customization:</strong> Tailored platforms that align with your operational workflows
+                        and goals.</li>
+                </ul>
+            </div>
+            <div class="card2">
+                <h2>Industries Leveraging SaaS Solutions</h2>
+                <ul>
+                    <li><strong>Education:</strong> AI-driven LMS platforms for online learning and corporate training.
+                    </li>
+                    <li><strong>Retail:</strong> Inventory optimization and customer engagement platforms.</li>
+                    <li><strong>Healthcare:</strong> Telemedicine, AI-powered patient management, and automated billing.
+                    </li>
+                    <li><strong>Manufacturing:</strong> Smart ERP solutions for supply chain and production efficiency.
+                    </li>
+                    <li><strong>Real Estate:</strong> AI-driven CRM platforms for lead tracking and property management.
+                    </li>
+                </ul>
+            </div>
+            <div class="card2">
+                <h2>Key Stats</h2>
+                <ul>
+                    <li><strong>30% Faster Implementation:</strong> Cloud-native SaaS solutions deploy faster than
+                        traditional software.</li>
+                    <li><strong>50% Cost Reduction: </strong>Businesses cut infrastructure and maintenance costs with
+                        SaaS adoption.</li>
+                </ul>
+            </div>
+            <div class="card2">
+                <h2>Case Study: LMS for ERESGA Technology</h2>
+                <ul>
+                    <li><strong>Challenge:</strong> Aviation professionals needed a centralized, scalable training
+                        solution.</li>
+                    <li><strong>Solution:</strong> Delivered an AI-powered cloud-based LMS with multilingual support and
+                        real-time analytics.</li>
+                    <li><strong>Result:</strong> Higher user engagement and accelerated onboarding for aviation
+                        professionals.</li>
+
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="container23">
+        <div class="header-section23">
+            <h1>Optimize Business Operations with AI-Powered Digital Twins</h1>
+            <p class="italic-text">Digital Twins are revolutionizing industries by creating real-time virtual replicas
+                of physical systems, enabling businesses to optimize performance, reduce risks, and improve efficiency.
+                At Gritbyte Labs, we develop AI-driven Digital Twins that provide real-time monitoring, predictive
+                analytics, and intelligent decision-making for industries such as smart manufacturing, real estate, and
+                urban planning. </p>
+        </div>
+
+    </div>
+
+    <div class="digitaltwins-container">
+        <div class="digitaltwins-section-title">Our Digital Twin Offerings</div>
+        <div class="digitaltwins-cards">
+            <div class="digitaltwins-card">
+                <h3>1. Live Asset Tracking & Remote Monitoring</h3>
+                <p>Gain real-time visibility into equipment, infrastructure, and processes with AI-powered Digital Twins, reducing downtime and optimizing operational efficiency.</p>
+                <b >a. Industries</b>
+                <ul>
+                    <li><b>Manufacturing:</b> Monitor factory machinery, optimize workflows, and predict failures.</li>
+                    <li><b>Energy & Utilities:</b> Track power grids, pipelines, and renewable energy sources.</li>
+                    <li><b>Smart Cities:</b> Improve traffic management and urban planning.</li>
+                </ul>
+                <b>b. Example:</b> AI-driven predictive maintenance for industrial machinery reduces unexpected failures by <b>40%.</b>
+            </div>
+            <div class="digitaltwins-card">
+                <h3>2. AI-Powered Forecasting & Risk Mitigation</h3>
+                <p>Enhance decision-making with AI-based simulations that predict failures, analyze trends, and mitigate risks before they occur.</p>
+                <b>a. Industries</b>
+                <ul>
+                    <li><b>Construction & Real Estate:</b> Forecast structural integrity and optimize resource allocation.</li>
+                    <li><b>Logistics & Supply Chain:</b> Predict demand fluctuations, optimize inventory, and prevent disruptions.</li>
+                    <li><b>Healthcare:</b> Simulate patient flow and optimize hospital resource management.</li>
+                </ul>
+                <b>b. Example:</b> AI-powered Digital Twins predict supply chain bottlenecks, reducing delays by <b>30%.</b>
+            </div>
+            <div class="digitaltwins-card">
+                <h3>3. Interactive 3D Modeling & Simulation-Based Testing</h3>
+                <p>Develop high-fidelity 3D environments to simulate real-world scenarios, test new strategies, and optimize performance in a risk-free digital space.</p>
+                <b>a. Industries</b>
+                <ul>
+                    <li><b>Automotive & Aerospace:</b> Simulate vehicle performance under different conditions.</li>
+                    <li><b>Retail & E-Commerce:</b> Create virtual store layouts and optimize customer experience.</li>
+                    <li><b>Defense & Security:</b> Train personnel with hyper-realistic mission simulations.</li>
+                </ul>
+                <b>b. Example:</b> Automotive companies reduce prototyping costs by <b>50%</b> using Digital Twin simulations before production.
+            </div>
+        </div>
+
+        <div class="digitaltwins-section-title">Benefits of AI-Powered Digital Twins</div>
+        <div class="digitaltwins-benefits">
+            <div class="digitaltwins-benefits-container">
+                <div class="digitaltwins-benefit">
+                    <h4>Real-Time Operational Insights:</h4>
+                    <p>Monitor assets, detect anomalies, and optimize performance.</p>
+                </div>
+                <div class="digitaltwins-benefit">
+                    <h4>Cost Savings & Risk Reduction:</h4>
+                    <p>Identify inefficiencies and mitigate risks before they escalate.</p>
+                </div>
+                <div class="digitaltwins-benefit">
+                    <h4>Data-Driven Decision-Making:</h4>
+                    <p>AI-powered simulations help businesses make smarter, more informed decisions.</p>
+                </div>
+                <div class="digitaltwins-benefit">
+                    <h4>Data-Driven Decision-Making:</h4>
+                    <p>AI-powered simulations help businesses make smarter, more informed decisions.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="future-proof-section">
+        <div class="container60">
+            <div class="headline60">
+                <span>Empower your operations with cutting-edge, cloud-native SaaS solutions</span>
+            </div>
+            <a href="Contact.html" class="button60">
+                Learn More About SaaS Development<span class="arrow">→</span>
+            </a>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <hr>
+        <div class="footer-container">
+            <div class="footer-column">
+                <div class="footer-text">
+                    <p>At Gritbyte Labs, we specialize in XR, AI, and scalable technology solutions that empower
+                        businesses worldwide. With 260+ successful projects across 20+ countries, we’re your trusted
+                        partner for innovation.</p>
+                    <a href="#" class="arrow">&#10145;</a>
+                </div>
+                <div class="certified-trusted">
+                    <div class="certified">
+                        <p>Certified by</p>
+                        <img src="certified.png" alt="Certified">
+                    </div>
+                    <div class="trusted">
+                        <p>Trusted by</p>
+                        <div class="trusted-images">
+                            <img src="pfzier.png" alt="Trusted">
+                            <img src="Hundai.png" alt="Trusted">
+                            <img src="bosch.png" alt="Trusted">
+                            <img src="rexorth.png" alt="Trusted">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-column">
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="Product.html">Products</a>
+                    <a href="Solutions.html">Solutions</a>
+                    <a href="Blog.html">Blog</a>
+                    <a href="CaseStudy.html">Case Studies</a>
+                    <a href="Contact.html">Contact Us</a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/gritbyte/"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.linkedin.com/company/gritbytelabs/"><i class="fab fa-linkedin-in"></i></a>
+                    <!-- <a href="#"><i class="fab fa-x-twitter"></i></a> -->
+
+                    <a href="https://www.instagram.com/gritbyte/?hl=en"><i class="fab fa-instagram"></i></a>
+                </div>
+                <hr>
+                <div class="contact-info">
+                    <p><i class="fas fa-phone"></i> <a href="tel:+918431962626">+91-8431962626</a></p>
+                    <p><i class="fas fa-envelope"></i> <a href="mailto:contact@gritbyte.com">contact@gritbyte.com</a>
+                    </p>
+                </div>
+                <hr>
+                <div class="location-row">
+                    <div class="location">
+                        <img src="India (IN).png" alt="Location">
+                        <p>Bangalore<br>Mysuru</p>
+                    </div>
+                    <div class="vertical-line"></div> <!-- Line between columns -->
+
+                    <div class="location">
+                        <img src="South Korea (KR).png" alt="Location">
+                        <p>Seoul</p>
+                    </div>
+                    <div class="vertical-line"></div>
+
+                    <div class="location">
+                        <img src="United Kingdom (GB).png" alt="Location">
+                        <p>London</p>
+                    </div>
+                    <div class="vertical-line"></div>
+
+                    <div class="location">
+                        <img src="Canada (CA).png" alt="Location">
+                        <p>Toronto</p>
+                    </div>
+                    <div class="vertical-line"></div>
+
+                    <div class="location">
+                        <img src="United Arab Emirates (AE).png" alt="Location">
+                        <p>Downtown <br>Dubai</p>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+        <hr>
+    </footer>
+    <div class="footer-bottom">
+        <p style="font-weight: bold;color: #000;" class="copyright">&copy; 2025 Gritbyte Labs. All Rights Reserved.</p>
+        <div class="footer-links-bottom">
+            <a href="TermsofUse.html">Terms & Conditions </a> |
+            <a href="FAQ.html">FAQs </a> |
+            <a href="PrivacyPolicy.html">Privacy Policy </a>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("contextmenu", function (event) {
+            event.preventDefault();
+        });
+
+        document.addEventListener("keydown", function (event) {
+            if (event.ctrlKey && (event.key === "u" || event.key === "U" || event.key === "i" || event.key === "I")) {
+                event.preventDefault();
+            }
+            if (event.key === "F12" || (event.ctrlKey && event.shiftKey && event.key === "I")) {
+                event.preventDefault();
+            }
+        });
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const elements = document.querySelectorAll(
+                ".container-heading, h2, .digitaltwins-section-title, .digitaltwins-card h3,.digitaltwins-benefits h3 "
+            );
+
+            function revealOnScroll() {
+                elements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+
+                    if (elementTop < windowHeight - 100) {
+                        element.classList.add("reveal");
+                    }
+                });
+            }
+
+            window.addEventListener("scroll", revealOnScroll);
+            revealOnScroll(); // Run on page load in case elements are already in view
+        });
+
+    </script>
+    <script>
+        function toggleMenu() {
+            document.getElementById("nav-menu").classList.toggle("open");
+        }
+
+        const header = document.getElementById('header');
+        const logoImage = document.getElementById('logo');
+        const ctaButton = document.querySelector('.cta-button'); // Select the button
+        const originalLogoSrc = 'hel.png';
+        const scrolledLogoSrc = 'Gritbyte Logo 1 (1).png';
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+                logoImage.src = scrolledLogoSrc;
+                ctaButton.style.color = 'white'; // Keep text color white
+            } else {
+                header.classList.remove('scrolled');
+                logoImage.src = originalLogoSrc;
+                ctaButton.style.color = 'white'; // Ensure text remains white
+            }
+        });
+    </script>
+    <script>
+        document.getElementById("currentDate").textContent = new Date().toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+    </script>
+</body>
+
+</html>

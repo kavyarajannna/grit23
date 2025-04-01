@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       
+        <title>FAQ Section</title>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    
+        <link rel="icon" type="image/png" href="header.jpg"> <!-- Favicon -->
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    
+    
+        <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: 'Inter', sans-serif;
+            }
+
+            html,
+            body {
+                overflow-x: hidden;
+                width: 100%;
+            }
+
+
+            header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 20px 50px;
+                position: relative;
+                background-color: white;
+                z-index: 1000;
+            }
+
+            .menu-icon {
+                display: none;
+                font-size: 30px;
+                cursor: pointer;
+                color: black;
+            }
+
+            nav {
+                display: flex;
+                align-items: center;
+            }
+
+            nav a {
+                font-weight: 400;
+                margin: 0 15px;
+                color: black;
+                text-decoration: none;
+                font-size: 15px;
+                line-height: 24px;
+                position: relative;
+            }
+
+            nav a:hover::after {
+                content: "";
+                position: absolute;
+                left: 0;
+                bottom: -3px;
+                width: 100%;
+                height: 2px;
+                background-color: #5107B8;
+            }
+            nav a.cta-button {
+            background-color: #5107B8;
+            color: white !important;
+            padding: 10px 20px;
+            font-weight: 900;
+            font-size: 14px;
+            line-height: 16.8px;
+            letter-spacing: 20%;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease-in-out;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        /* Smooth Scale Effect */
+        nav a.cta-button:hover {
+            transform: scale(1.05) translateY(-2px);
+        }
+
+        /* Sliding Effect */
+        nav a.cta-button::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            top: 0;
+            left: -100%;
+            transition: left 0.3s ease-in-out;
+        }
+
+        nav a.cta-button:hover::after {
+            left: 100%;
+        }
+
+        /* Subtle Press Effect */
+        nav a.cta-button:active {
+            transform: scale(0.95);
+        }
+            @media (max-width: 768px) {
+                header {
+                    padding: 10px 20px;
+                }
+
+                .menu-icon {
+                    display: block;
+                }
+
+                #nav-menu {
+                    position: fixed;
+                    top: 0;
+                    right: 0;
+                    background-color: white;
+                    height: 100%;
+                    width: 250px;
+                    transform: translateX(100%);
+                    transition: transform 0.3s ease;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-start;
+                    padding: 20px;
+                }
+
+                #nav-menu a {
+                    color: black;
+                    margin-bottom: 20px;
+                }
+
+                #nav-menu.open {
+                    transform: translateX(0);
+                }
+
+                .close-menu {
+                    font-size: 30px;
+                    color: black;
+                    cursor: pointer;
+                    position: absolute;
+                    top: 20px;
+                    right: 20px;
+                }
+            }
+
+            @media (min-width: 769px) {
+                .close-menu {
+                    display: none;
+                }
+            }
+
+            @media (max-width: 768px) {
+                .desktop-home {
+                    display: none;
+                }
+            }
+
+            @media (min-width: 769px) {
+                .mobile-home {
+                    display: none;
+                }
+            }
+
+
+            .faq-container {
+                padding: 1% 5%;
+                max-width: 100%;
+                border-radius: 8px;
+            }
+
+            .faq-container h1 {
+
+                /* font-family: "Bower", Georgia, "Times New Roman", serif; */
+                font-size: 24px;
+                line-height: 28.8px;
+                letter-spacing: -0.02em;
+                /* Reduces letter spacing by 2% */
+                color: #5107B8;
+                text-align: left;
+                margin-bottom: 4rem;
+                font-weight: 800;
+
+            }
+
+            .faq-categories {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+                padding-bottom: 10px;
+                justify-content: center;
+            }
+
+            .faq-categories div {
+                background: #f3f3f3;
+                padding: 10px 15px;
+                font-weight: 600;
+                text-align: center;
+                border-radius: 5px;
+                font-size: 16px;
+                line-height: 22.4px;
+                flex: 1;
+                /* font-family: "McKinsey Sans", "Helvetica Neue", Calibri, Corbel, Helvetica, Roboto, Droid, sans-serif; */
+                min-width: 180px;
+                cursor: pointer;
+                transition: background 0.3s ease;
+            }
+
+            .faq-categories div:hover {
+                background: #ddd;
+            }
+
+            .faq-title {
+                color: #5107B8;
+                letter-spacing: -0.02em;
+                /* Reduces letter spacing by 2% */
+                font-weight: 800;
+                /* font-family: "Bower", Georgia, "Times New Roman", serif; */
+                line-height: 28.8px;
+                font-size: 24px;
+                margin-top: 70px;
+
+            }
+
+            .faq-item {
+                margin: 15px 0;
+                padding: 15px;
+            }
+
+            .faq-item h3 {
+                font-weight: 700;
+                margin-bottom: 1%;
+                /* font-family: "Bower", Georgia, "Times New Roman", serif; */
+                line-height: 24px;
+                font-size: 20px;
+                color: #000000;
+            }
+
+            .faq-item p {
+                margin: 5px 0;
+                font-size: 20px;
+                line-height: 24px;
+                font-weight: 400;
+                /* font-family: "McKinsey Sans", "Helvetica Neue", Calibri, Corbel, Helvetica, Roboto, Droid, sans-serif; */
+
+                color: #000000;
+                padding-left: 2rem;
+            }
+
+
+
+            .industries {
+                max-width: 600px;
+                /* Adjust as needed */
+                margin: 0 auto;
+                /* Center the text */
+                text-align: left;
+                /* Align text properly */
+                white-space: normal;
+                /* Ensure wrapping */
+                word-break: break-word;
+                /* Prevent overflow issues */
+            }
+
+
+            .global-partner-wrapper {
+                max-width: 600px;
+                /* Set a max width */
+                margin-left: 2rem;
+                /* Adjust margin for proper alignment */
+            }
+
+            .global-partners {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 15px;
+                /* Add spacing between items */
+                align-items: center;
+                justify-content: flex-start;
+                /* Align content to the left */
+            }
+
+            .global-partners span {
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                /* Adjust spacing between flag and text */
+                white-space: nowrap;
+                /* Prevent text from breaking into multiple lines */
+            }
+
+            .global-partners img {
+                width: 20px;
+                height: 15px;
+            }
+
+
+
+
+            /* Button Styling */
+            button {
+                background-color: #5107B8;
+                color: white;
+                border: none;
+                padding: 12px 24px;
+                font-size: 1rem;
+                font-weight: bold;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background 0.3s ease, transform 0.2s ease;
+                margin-top: 10px;
+            }
+
+            /* Default: Button Left-Aligned */
+            .faq-item .btn-container {
+                text-align: left;
+            }
+
+            /* Button Hover Effect */
+            button:hover {
+                background-color: #6a0dad;
+                transform: scale(1.05);
+            }
+
+            /* Center Button on Small Screens */
+            @media (max-width: 1024px) {
+                .faq-item .btn-container {
+                    text-align: center;
+                }
+            }
+
+
+            /* List Item Styling */
+            ul {
+                padding-left: 2rem;
+            }
+
+            li {
+                list-style-type: none;
+                font-size: 1rem;
+                color: #000000;
+                position: relative;
+                padding-left: 25px;
+                margin-bottom: 8px;
+            }
+
+            li::before {
+                content: "•";
+                color: black;
+                font-size: 1.2rem;
+                font-weight: bold;
+                position: absolute;
+                left: 0;
+                top: 2px;
+            }
+
+            /* Responsive Design */
+            @media (max-width: 1024px) {
+
+
+                .faq-categories {
+                    flex-direction: column;
+                    align-items: center;
+                }
+
+                .faq-categories div {
+                    width: 100%;
+                    max-width: 400px;
+                }
+
+                .faq-title {
+                    font-size: 1.4rem;
+                    text-align: left;
+                }
+
+                .faq-item {
+                    text-align: left;
+                }
+
+
+            }
+
+            @media (max-width: 768px) {
+                h1 {
+                    font-size: 1.5rem;
+                }
+
+                .faq-title {
+                    font-size: 1.3rem;
+                }
+
+                .faq-item {
+                    text-align: justify;
+                    padding: 10px;
+                }
+
+                .faq-item h3 {
+                    font-size: 1.1rem;
+                }
+
+                .faq-item p {
+                    text-align: justify;
+                    font-size: 0.95rem;
+                    padding-left: 1rem;
+                }
+
+                ul {
+                    padding-left: 1rem;
+                }
+
+                button {
+                    font-size: 0.95rem;
+                    padding: 10px 20px;
+                }
+            }
+
+            .future-proof-section {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 516px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .future-proof-section .container60 {
+            background-color: #f5f5f5;
+            padding: 20px;
+            max-width: 90%;
+        }
+
+        .future-proof-section .headline60 {
+            font-weight: 900;
+            line-height: 1.2;
+            font-size: 32px;
+            color: #000000;
+        }
+
+        .future-proof-section .headline60 span {
+            display: block;
+        }
+
+        .future-proof-section .button60 {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #5107B8;
+            color: white;
+            width: 432px;
+            height: 72px;
+            font-size: 14px;
+            font-weight: 900;
+            text-transform: uppercase;
+            border-radius: 4px;
+            margin-top: 30px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s, color 0.3s, border 0.3s;
+            gap: 30px;
+            border: 2px solid #5107B8;
+        }
+
+        .future-proof-section .button60:hover {
+            background-color: white;
+            color: #5107B8;
+            border: 2px solid #5107B8;
+        }
+
+        .future-proof-section .button60 .arrow {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .future-proof-section .button60:hover .arrow {
+            transform: translateX(5px);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .future-proof-section {
+                height: auto;
+                padding: 15px;
+            }
+
+            .future-proof-section .headline60 {
+                font-size: 5vw;
+            }
+
+            .future-proof-section .button60 {
+                font-size: 4vw;
+                padding: 10px 20px;
+                width: 80%;
+                height: auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .future-proof-section {
+                height: auto;
+                padding: 10px;
+            }
+
+            .future-proof-section .container60 {
+                max-width: 100%;
+            }
+
+            .future-proof-section .headline60 {
+                font-size: 6vw;
+            }
+
+            .future-proof-section .button60 {
+                font-size: 3.5vw;
+                width: 100%;
+                height: auto;
+            }
+        }
+
+/* Keep original design */
+.faq-container h1,
+.faq-title {
+            opacity: 0;
+            transform: translateY(20px);
+            /* Smooth entry */
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        /* Reveal effect */
+        .faq-container h1.reveal,
+        .faq-title.reveal {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+
+
+
+        .footer {
+            padding: 0 5%;
+            padding-top: 4%;
+
+        }
+
+        .footer hr {
+            border: 0;
+            height: 1px;
+            background: #ccc;
+            margin-bottom: 20px;
+        }
+
+        .footer-container {
+
+            padding-top: 3%;
+            padding-bottom: 3%;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+            padding: 0 20px;
+        }
+
+        .footer-text {
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 1.5rem;
+            color: black;
+            text-align: left;
+        }
+
+        .footer-text a {
+            display: block;
+            text-decoration: none;
+            font-size: 32px;
+            color: black;
+            width: 60px;
+            text-align: left;
+            margin-top: 10px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-size: 14px;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: black;
+            display: flex;
+            font-weight: 600;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 16px;
+            line-height: 2.5rem;
+            position: relative;
+            /* Needed for pseudo-elements */
+            transition: color 0.3s ease-in-out;
+        }
+
+        /* Right arrow */
+        .footer-links a::after {
+            content: " ➡";
+            /* Space before the arrow for spacing */
+            color: black;
+            font-size: 16px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        /* Bottom line animation */
+        .footer-links a::before {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            width: 0%;
+            height: 2px;
+            background-color: #5107B8;
+            transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
+        }
+
+        /* Hover effects */
+        .footer-links a:hover {
+            color: #5107B8;
+        }
+
+        .footer-links a:hover::after {
+            transform: translateX(5px);
+            /* Moves arrow slightly to the right */
+            color: #5107B8;
+        }
+
+        .footer-links a:hover::before {
+            width: 100%;
+            left: 0;
+        }
+
+
+        .footer-column:nth-child(2) {
+            flex: 0 0 150px;
+            /* Adjust the width of the second column */
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 25px;
+            padding-bottom: 4%;
+        }
+
+        .social-icons a {
+            position: relative;
+            /* Needed for absolute positioning of ::after */
+            color: black;
+            font-size: 24px;
+            transition: color 0.3s ease-in-out;
+            text-decoration: none;
+        }
+
+        /* Hover color change */
+        .social-icons a:hover {
+            color: #5107B8;
+        }
+
+        /* Adding the bottom line effect */
+        .social-icons a::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: -5px;
+            /* Position below the icon */
+            width: 0%;
+            height: 2px;
+            background-color: #5107B8;
+            transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
+        }
+
+        /* Expand line on hover */
+        .social-icons a:hover::after {
+            width: 100%;
+            left: 0;
+        }
+
+
+        .contact-info {
+            padding-bottom: 3%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            font-size: 14px;
+        }
+
+        .contact-info i {
+            margin-right: 8px;
+            color: #000000;
+        }
+
+        .contact-info a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        .contact-info a:hover {
+            color: #5107B8;
+        }
+
+        .contact-info p {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .certified-trusted {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .certified,
+        .trusted {
+            /* flex: 1; */
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding-top: 16.5%;
+        }
+
+        .certified p,
+        .trusted p {
+            font-size: 16px;
+
+            margin-bottom: 10px;
+        }
+
+        .trusted-images {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 768px) {
+            .certified-trusted {
+                flex-direction: column;
+                /* Stack items vertically */
+                align-items: flex-start;
+                /* Align items to the left */
+                gap: 20px;
+            }
+
+            .certified {
+                text-align: left;
+                align-items: flex-start;
+                width: 100%;
+            }
+
+            .certified img {
+                max-width: 100px;
+                /* Adjust size if needed */
+            }
+
+            .trusted {
+                text-align: center;
+                align-items: center;
+                width: 100%;
+            }
+
+            .trusted-images {
+                display: flex;
+                flex-wrap: nowrap;
+                /* Prevent wrapping */
+                overflow-x: auto;
+                /* Enable horizontal scrolling if needed */
+                gap: 10px;
+                justify-content: flex-start;
+                /* Align images to the left */
+                white-space: nowrap;
+                /* Ensure images stay in one row */
+                padding-bottom: 5px;
+                /* Prevent cut-off on small screens */
+            }
+
+            .trusted-images img {
+                max-width: 80px;
+                /* Adjust image size if necessary */
+                height: auto;
+                flex-shrink: 0;
+                /* Prevent images from shrinking */
+            }
+        }
+
+
+        .vertical-line {
+            min-height: 80px;
+            /* Ensures the line is visible */
+            width: 2px;
+            background: #ccc;
+            display: inline-block;
+        }
+
+        .location-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 18px;
+            /* Adjust spacing */
+            padding-top: 7%;
+            flex-wrap: wrap;
+            /* Allows wrapping on smaller screens */
+        }
+
+
+        .location {
+            color: #757575;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            padding: 10px;
+        }
+
+        .location img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+
+            padding: 8px;
+            margin-bottom: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+
+        }
+
+
+
+
+
+        .footer-bottom {
+            display: flex;
+            flex-wrap: wrap;
+            /* Allows wrapping on smaller screens */
+            justify-content: space-between;
+            align-items: center;
+            padding-left: 5%;
+            padding-right: 5%;
+            padding-top: 10px;
+            padding-bottom: 5%;
+
+            font-size: 14px;
+            color: #666;
+
+        }
+
+        .footer-links-bottom {
+            display: flex;
+            flex-wrap: wrap;
+            /* Allows links to wrap if needed */
+            gap: 10px;
+        }
+
+        .footer-links-bottom a {
+            text-decoration: none;
+            color: black;
+            font-size: 16px;
+            margin: 0 10px;
+            white-space: nowrap;
+            /* Prevents links from breaking into two lines */
+        }
+
+        .footer-links-bottom a:hover {
+            color: #000;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .footer-bottom {
+                flex-direction: column;
+                /* Stack items on smaller screens */
+                text-align: center;
+                gap: 10px;
+            }
+
+            .footer-links-bottom {
+                justify-content: center;
+            }
+        }
+
+
+        @media (max-width: 768px) {
+            .footer-container {
+                flex-direction: column;
+            }
+
+            .footer-links {
+                padding-left: 0;
+                padding-right: 0;
+                text-align: center;
+            }
+
+            .footer-links-bottom {
+                flex-wrap: nowrap;
+                /* Prevents wrapping */
+                justify-content: center;
+                gap: 5px;
+                /* Adjust spacing between links */
+            }
+
+            .footer-links-bottom a {
+                text-decoration: none;
+                color: black;
+                font-size: 12px;
+                margin: 0 1px;
+                white-space: nowrap;
+            }
+
+            .certified-trusted {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .trusted {
+                align-items: flex-start;
+            }
+        }
+            .container {
+                padding: 5%;
+
+                margin: auto;
+            }
+
+            .header-section {
+                border-left: 16px solid #5107B8;
+                padding-left: 10px;
+            }
+
+            .header-section h1 {
+                font-size: 48px;
+                /* font-family: "Bower", Georgia, "Times New Roman", serif; */
+                font-weight: 700;
+                letter-spacing: -0.02em;
+                /* Reduces letter spacing by 2% */
+                color: #5107B8;
+                line-height: 57.6px;
+                padding-bottom: 1rem;
+            }
+
+            .header-section p {
+                font-style: italic;
+                color: #000000;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 22.4px;
+                /* font-family: "McKinsey Sans", "Helvetica Neue", Calibri, Corbel, Helvetica, Roboto, Droid, sans-serif; */
+            }
+            .mobile-only {
+            display: none;
+            /* Hide by default */
+        }
+
+        @media screen and (max-width: 768px) {
+            .mobile-only {
+                display: block;
+                /* Show only on mobile */
+            }
+        }
+            /* Responsive Under Construction Section */
+        .hello-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 50vh;
+            padding: 20px;
+            background: linear-gradient(135deg, #5a0fc8, #8a2be2);
+            color: white;
+            text-align: center;
+        }
+
+        .hello {
+            padding: 20px 40px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            animation: pulse 1.5s infinite alternate ease-in-out;
+            max-width: 90%;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .hello h1 {
+            font-size: 2rem;
+            margin: 0;
+        }
+
+        .hello p {
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hello {
+                padding: 15px 20px;
+            }
+            .hello h1 {
+                font-size: 1.5rem;
+            }
+            .hello p {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hello h1 {
+                font-size: 1.2rem;
+            }
+            .hello p {
+                font-size: 0.9rem;
+            }
+        }
+        </style>
+    </head>
+
+<body>
+    <header id="header">
+        <div class="logo">
+            <a href="index.html"><img id="logo" src="Gritbyte Logo 1 (1).png" alt="Gritbyte Labs Logo" height="40"></a>
+        </div>
+        <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+        <nav id="nav-menu">
+            <div class="close-menu" onclick="toggleMenu()">×</div>
+            <a href="index.html" class="desktop-home"><i class="fas fa-home"></i></a>
+            <a href="index.html" class="mobile-only">Home</a>
+            <a href="Product.html">Products</a>
+            <a href="Solutions.html">Solutions</a>
+            <a href="Blog.html">Blog</a>
+            <a href="CaseStudy.html">Case Studies</a>
+            <a href="Contact.html">Contact Us</a>
+            <a href="Contact.html" class="cta-button">GET IN TOUCH</a>
+        </nav>
+    </header>
+
+    <section class="hello-section">
+        <div class="hello">
+            <h1>This page is under construction.</h1>
+            <p>Stay tuned for the fantastics of <strong>Gritbyte</strong> here.</p>
+        </div>
+    </section>
+  
+    <div class="future-proof-section">
+        <div class="container60">
+            <div class="headline60">
+                <span>Future-proof your business in 2025.</span>
+                <span>Explore how Gritbyte Labs can empower your industry.</span>
+            </div>
+            <a href="Contact.html" class="button60">
+                Get in Touch<span class="arrow">→</span>
+            </a>
+        </div>
+    </div>
+   
+    <footer class="footer">
+        <hr>
+        <div class="footer-container">
+            <div class="footer-column">
+                <div class="footer-text">
+                    <p>At Gritbyte Labs, we specialize in XR, AI, and scalable technology solutions that empower
+                        businesses worldwide. With 260+ successful projects across 20+ countries, we’re your trusted
+                        partner for innovation.</p>
+                    <a href="#" class="arrow">&#10145;</a>
+                </div>
+                <div class="certified-trusted">
+                    <div class="certified">
+                        <p>Certified by</p>
+                        <img src="certified.png" alt="Certified">
+                    </div>
+                    <div class="trusted">
+                        <p>Trusted by</p>
+                        <div class="trusted-images">
+                            <img src="pfzier.png" alt="Trusted">
+                            <img src="Hundai.png" alt="Trusted">
+                            <img src="bosch.png" alt="Trusted">
+                            <img src="rexorth.png" alt="Trusted">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-column">
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="Product.html">Products</a>
+                    <a href="Solutions.html">Solutions</a>
+                    <a href="Blog.html">Blog</a>
+                    <a href="CaseStudy.html">Case Studies</a>
+                    <a href="Contact.html">Contact Us</a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/gritbyte/"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.linkedin.com/company/gritbytelabs/"><i class="fab fa-linkedin-in"></i></a>
+                    <!-- <a href="#"><i class="fab fa-x-twitter"></i></a> -->
+
+                    <a href="https://www.instagram.com/gritbyte/?hl=en"><i class="fab fa-instagram"></i></a>
+                </div>
+                <hr>
+                <div class="contact-info">
+                    <p><i class="fas fa-phone"></i> <a href="tel:+918431962626">+91-8431962626</a></p>
+                    <p><i class="fas fa-envelope"></i> <a href="mailto:contact@gritbyte.com">contact@gritbyte.com</a>
+                    </p>
+                </div>
+                <hr>
+                <div class="location-row">
+                    <div class="location">
+                        <img src="India (IN).png" alt="Location">
+                        <p>Bangalore<br>Mysuru</p>
+                    </div>
+                    <div class="vertical-line"></div> <!-- Line between columns -->
+
+                    <div class="location">
+                        <img src="South Korea (KR).png" alt="Location">
+                        <p>Seoul</p>
+                    </div>
+                    <div class="vertical-line"></div>
+
+                    <div class="location">
+                        <img src="United Kingdom (GB).png" alt="Location">
+                        <p>London</p>
+                    </div>
+                    <div class="vertical-line"></div>
+
+                    <div class="location">
+                        <img src="Canada (CA).png" alt="Location">
+                        <p>Toronto</p>
+                    </div>
+                    <div class="vertical-line"></div>
+
+                    <div class="location">
+                        <img src="United Arab Emirates (AE).png" alt="Location">
+                        <p>Downtown <br>Dubai</p>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+        <hr>
+    </footer>
+    <div class="footer-bottom">
+        <p style="font-weight: bold;color: #000;" class="copyright">&copy; 2025 Gritbyte Labs. All Rights Reserved.</p>
+        <div class="footer-links-bottom">
+            <a href="TermsofUse.html">Terms & Conditions </a> |
+            <a href="FAQ.html">FAQs </a> |
+            <a href="PrivacyPolicy.html">Privacy Policy </a>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("contextmenu", function(event) {
+            event.preventDefault();
+        });
+    
+        document.addEventListener("keydown", function(event) {
+            if (event.ctrlKey && (event.key === "u" || event.key === "U" || event.key === "i" || event.key === "I")) {
+                event.preventDefault();
+            }
+            if (event.key === "F12" || (event.ctrlKey && event.shiftKey && event.key === "I")) {
+                event.preventDefault();
+            }
+        });
+    </script>
+    
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const elements = document.querySelectorAll(
+                ".faq-container h1,.faq-title"
+            );
+
+            function revealOnScroll() {
+                elements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+
+                    if (elementTop < windowHeight - 100) {
+                        element.classList.add("reveal");
+                    }
+                });
+            }
+
+            window.addEventListener("scroll", revealOnScroll);
+            revealOnScroll(); // Run on page load in case elements are already in view
+        });
+
+    </script>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById("nav-menu").classList.toggle("open");
+        }
+    </script>
+</body>
+
+
+
+
+
+</html>

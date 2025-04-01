@@ -1,0 +1,2177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Study</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+
+
+
+    <link rel="icon" type="image/png" href="header.jpg"> <!-- Favicon -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        html,
+        body {
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: transparent;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            z-index: 1000;
+        }
+
+        header.scrolled {
+            background-color: white;
+            color: black;
+        }
+
+        header.scrolled nav a {
+            color: black;
+        }
+
+        .menu-icon {
+            display: none;
+            font-size: 30px;
+            cursor: pointer;
+            color: white;
+            /* Default color before scrolling */
+            transition: color 0.3s ease;
+            /* Smooth transition */
+        }
+
+        header.scrolled .menu-icon {
+            color: black;
+            /* Change to black when scrolled */
+        }
+
+
+
+
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        nav a {
+            font-weight: 400;
+            margin: 0 15px;
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+            line-height: 24px;
+            position: relative;
+        }
+
+        nav a:hover::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -3px;
+            width: 100%;
+            height: 2px;
+            background-color: #5107B8;
+        }
+
+        nav a.cta-button {
+            background-color: #5107B8;
+            color: white !important;
+            padding: 10px 20px;
+            font-weight: 900;
+            font-size: 14px;
+            line-height: 16.8px;
+            letter-spacing: 20%;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease-in-out;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        /* Smooth Scale Effect */
+        nav a.cta-button:hover {
+            transform: scale(1.05) translateY(-2px);
+        }
+
+        /* Sliding Effect */
+        nav a.cta-button::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            top: 0;
+            left: -100%;
+            transition: left 0.3s ease-in-out;
+        }
+
+        nav a.cta-button:hover::after {
+            left: 100%;
+        }
+
+        /* Subtle Press Effect */
+        nav a.cta-button:active {
+            transform: scale(0.95);
+        }
+
+
+        @media (max-width: 768px) {
+            header {
+                padding: 10px 20px;
+            }
+
+            .menu-icon {
+                display: block;
+
+            }
+
+            #nav-menu {
+                position: fixed;
+                top: 0;
+                right: 0;
+                background-color: white;
+                height: 100%;
+                width: 250px;
+                transform: translateX(100%);
+                transition: transform 0.3s ease;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 20px;
+            }
+
+            #nav-menu a {
+                color: black;
+                margin-bottom: 20px;
+            }
+
+            #nav-menu.open {
+                transform: translateX(0);
+            }
+
+            .close-menu {
+                font-size: 30px;
+                color: black;
+                cursor: pointer;
+                position: absolute;
+                top: 20px;
+                right: 20px;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .close-menu {
+                display: none;
+            }
+        }
+
+        /* Hide home icon on mobile, show text */
+        @media (max-width: 768px) {
+            .desktop-home {
+                display: none;
+            }
+        }
+
+        /* Hide home text on desktop, show icon */
+        @media (min-width: 769px) {
+            .mobile-home {
+                display: none;
+            }
+        }
+
+        /* Keep original design */
+        .casestudy-content h2,
+        .feature-box h3 {
+            opacity: 0;
+            transform: translateY(20px);
+            /* Smooth entry */
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        /* Reveal effect */
+        .casestudy-content h2.reveal,
+        .feature-box h3.reveal {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+
+        .hero-section {
+            text-align: center;
+            position: relative;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 20px;
+            padding-bottom: 60px;
+            padding-left: 10%;
+            padding-right: 20%;
+
+            /* Add a black gradient at the top */
+            background: linear-gradient(to bottom, rgb(0 0 0 / 93%) 0%, rgba(0, 0, 0, 0) 40%);
+        }
+
+
+        .hero-background img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .hero-section h1,
+        .hero-section h3,
+        .hero-section p {
+            opacity: 0;
+            /* Initially hidden */
+            transform: translateY(30px);
+            /* Move down initially */
+            animation: fadeInUp 1.2s ease-out forwards;
+            /* Smooth reveal */
+        }
+
+        .hero-section h1 {
+            text-shadow: 2px 2px 4px rgb(0, 0, 0);
+            text-align: left;
+            color: white;
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 57.6px;
+        }
+
+        .hero-section p {
+            text-shadow: 2px 2px 4px rgb(0, 0, 0);
+            line-height: 24px;
+            font-weight: 400;
+            text-align: left;
+            color: white;
+            margin-top: 10px;
+            font-size: 20px;
+            opacity: 0.8;
+        }
+
+        /* Keyframes for Text Reveal Effect */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .hero-section {
+                padding-right: 10%;
+                /* Reduce right padding for smaller screens */
+            }
+
+            .hero-section h1 {
+                font-size: 32px;
+                line-height: 40px;
+            }
+
+            .hero-section p {
+                font-size: 16px;
+                line-height: 22px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-section {
+                padding-right: 8%;
+                /* Further reduce right padding for mobile */
+            }
+
+            .hero-section h1 {
+                font-size: 28px;
+                line-height: 36px;
+            }
+
+            .hero-section p {
+                font-size: 14px;
+                line-height: 20px;
+            }
+        }
+
+
+        .demo-button {
+            background-color: #7e00ff;
+            color: white;
+            padding: 15px 40px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+
+
+
+        .future-proof-section {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 516px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .future-proof-section .container60 {
+            background-color: #f5f5f5;
+            padding: 20px;
+            max-width: 90%;
+        }
+
+        .future-proof-section .headline60 {
+            font-weight: 900;
+            line-height: 1.2;
+            font-size: 32px;
+            color: #000000;
+        }
+
+        .future-proof-section .headline60 span {
+            display: block;
+        }
+
+        .future-proof-section .button60 {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #5107B8;
+            color: white;
+            width: 432px;
+            height: 72px;
+            font-size: 14px;
+            font-weight: 900;
+            text-transform: uppercase;
+            border-radius: 4px;
+            margin-top: 30px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s, color 0.3s, border 0.3s;
+            gap: 30px;
+            border: 2px solid #5107B8;
+        }
+
+        .future-proof-section .button60:hover {
+            background-color: white;
+            color: #5107B8;
+            border: 2px solid #5107B8;
+        }
+
+        .future-proof-section .button60 .arrow {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .future-proof-section .button60:hover .arrow {
+            transform: translateX(5px);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .future-proof-section {
+                height: auto;
+                padding: 15px;
+            }
+
+            .future-proof-section .headline60 {
+                font-size: 5vw;
+            }
+
+            .future-proof-section .button60 {
+                font-size: 4vw;
+                padding: 10px 20px;
+                width: 80%;
+                height: auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .future-proof-section {
+                height: auto;
+                padding: 10px;
+            }
+
+            .future-proof-section .container60 {
+                max-width: 100%;
+            }
+
+            .future-proof-section .headline60 {
+                font-size: 6vw;
+            }
+
+            .future-proof-section .button60 {
+                font-size: 4.5vw;
+                width: 100%;
+                height: auto;
+            }
+        }
+
+
+
+        .footer {
+            padding: 0 5%;
+            padding-top: 4%;
+
+        }
+
+        .footer hr {
+            border: 0;
+            height: 1px;
+            background: #ccc;
+            margin-bottom: 20px;
+        }
+
+        .footer-container {
+
+            padding-top: 3%;
+            padding-bottom: 3%;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+            padding: 0 20px;
+        }
+
+        .footer-text {
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 1.5rem;
+            color: black;
+            text-align: left;
+        }
+
+        .footer-text a {
+            display: block;
+            text-decoration: none;
+            font-size: 32px;
+            color: black;
+            width: 60px;
+            text-align: left;
+            margin-top: 10px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-size: 14px;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: black;
+            display: flex;
+            font-weight: 600;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 16px;
+            line-height: 2.5rem;
+            position: relative;
+            /* Needed for pseudo-elements */
+            transition: color 0.3s ease-in-out;
+        }
+
+        /* Right arrow */
+        .footer-links a::after {
+            content: " ➡";
+            /* Space before the arrow for spacing */
+            color: black;
+            font-size: 16px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        /* Bottom line animation */
+        .footer-links a::before {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            width: 0%;
+            height: 2px;
+            background-color: #5107B8;
+            transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
+        }
+
+        /* Hover effects */
+        .footer-links a:hover {
+            color: #5107B8;
+        }
+
+        .footer-links a:hover::after {
+            transform: translateX(5px);
+            /* Moves arrow slightly to the right */
+            color: #5107B8;
+        }
+
+        .footer-links a:hover::before {
+            width: 100%;
+            left: 0;
+        }
+
+
+        .footer-column:nth-child(2) {
+            flex: 0 0 150px;
+            /* Adjust the width of the second column */
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 25px;
+            padding-bottom: 4%;
+        }
+
+        .social-icons a {
+            position: relative;
+            /* Needed for absolute positioning of ::after */
+            color: black;
+            font-size: 24px;
+            transition: color 0.3s ease-in-out;
+            text-decoration: none;
+        }
+
+        /* Hover color change */
+        .social-icons a:hover {
+            color: #5107B8;
+        }
+
+        /* Adding the bottom line effect */
+        .social-icons a::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: -5px;
+            /* Position below the icon */
+            width: 0%;
+            height: 2px;
+            background-color: #5107B8;
+            transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
+        }
+
+        /* Expand line on hover */
+        .social-icons a:hover::after {
+            width: 100%;
+            left: 0;
+        }
+
+
+        .contact-info {
+            padding-bottom: 3%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            font-size: 14px;
+        }
+
+        .contact-info i {
+            margin-right: 8px;
+            color: #000000;
+        }
+
+        .contact-info a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        .contact-info a:hover {
+            color: #5107B8;
+        }
+
+        .contact-info p {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .certified-trusted {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .certified,
+        .trusted {
+            /* flex: 1; */
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding-top: 16.5%;
+        }
+
+        .certified p,
+        .trusted p {
+            font-size: 16px;
+
+            margin-bottom: 10px;
+        }
+
+        .trusted-images {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 768px) {
+            .certified-trusted {
+                flex-direction: column;
+                /* Stack items vertically */
+                align-items: flex-start;
+                /* Align items to the left */
+                gap: 20px;
+            }
+
+            .certified {
+                text-align: left;
+                align-items: flex-start;
+                width: 100%;
+            }
+
+            .certified img {
+                max-width: 100px;
+                /* Adjust size if needed */
+            }
+
+            .trusted {
+                text-align: center;
+                align-items: center;
+                width: 100%;
+            }
+
+            .trusted-images {
+                display: flex;
+                flex-wrap: nowrap;
+                /* Prevent wrapping */
+                overflow-x: auto;
+                /* Enable horizontal scrolling if needed */
+                gap: 10px;
+                justify-content: flex-start;
+                /* Align images to the left */
+                white-space: nowrap;
+                /* Ensure images stay in one row */
+                padding-bottom: 5px;
+                /* Prevent cut-off on small screens */
+            }
+
+            .trusted-images img {
+                max-width: 80px;
+                /* Adjust image size if necessary */
+                height: auto;
+                flex-shrink: 0;
+                /* Prevent images from shrinking */
+            }
+        }
+
+
+        .vertical-line {
+            min-height: 80px;
+            /* Ensures the line is visible */
+            width: 2px;
+            background: #ccc;
+            display: inline-block;
+        }
+
+        .location-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 18px;
+            /* Adjust spacing */
+            padding-top: 7%;
+            flex-wrap: wrap;
+            /* Allows wrapping on smaller screens */
+        }
+
+
+        .location {
+            color: #757575;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            padding: 10px;
+        }
+
+        .location img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+
+            padding: 8px;
+            margin-bottom: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+
+        }
+
+
+
+
+
+        .footer-bottom {
+            display: flex;
+            flex-wrap: wrap;
+            /* Allows wrapping on smaller screens */
+            justify-content: space-between;
+            align-items: center;
+            padding-left: 5%;
+            padding-right: 5%;
+            padding-top: 10px;
+            padding-bottom: 5%;
+
+            font-size: 14px;
+            color: #666;
+
+        }
+
+        .footer-links-bottom {
+            display: flex;
+            flex-wrap: wrap;
+            /* Allows links to wrap if needed */
+            gap: 10px;
+        }
+
+        .footer-links-bottom a {
+            text-decoration: none;
+            color: black;
+            font-size: 16px;
+            margin: 0 10px;
+            white-space: nowrap;
+            /* Prevents links from breaking into two lines */
+        }
+
+        .footer-links-bottom a:hover {
+            color: #000;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .footer-bottom {
+                flex-direction: column;
+                /* Stack items on smaller screens */
+                text-align: center;
+                gap: 10px;
+            }
+
+            .footer-links-bottom {
+                justify-content: center;
+            }
+        }
+
+
+        @media (max-width: 768px) {
+            .footer-container {
+                flex-direction: column;
+            }
+
+            .footer-links {
+                padding-left: 0;
+                padding-right: 0;
+                text-align: center;
+            }
+
+            .footer-links-bottom {
+                flex-wrap: nowrap;
+                /* Prevents wrapping */
+                justify-content: center;
+                gap: 5px;
+                /* Adjust spacing between links */
+            }
+
+            .footer-links-bottom a {
+                text-decoration: none;
+                color: black;
+                font-size: 12px;
+                margin: 0 1px;
+                white-space: nowrap;
+            }
+
+            .certified-trusted {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .trusted {
+                align-items: flex-start;
+            }
+        }
+
+        .casestudy {
+            padding: 5%;
+        }
+
+        .casestudy-container {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .casestudy-header {
+            position: relative;
+            width: 100%;
+        }
+
+        .casestudy-header img {
+            width: 100%;
+            border-radius: 24px;
+            height: 492px;
+            object-fit: cover;
+            opacity: 0;
+            /* Initially hidden */
+            transform: scale(1.1);
+            /* Start slightly zoomed */
+            transition: opacity 1.5s ease-out, transform 1.5s ease-out;
+        }
+
+        .casestudy-header img.show {
+            opacity: 1;
+            transform: scale(1);
+            /* Zoom back to normal */
+        }
+
+        .casestudy-header .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+            align-items: flex-start;
+            text-align: left;
+            color: white;
+            background: linear-gradient(to bottom, rgb(0 0 0 / 0%) 50%, rgb(0 0 0) 100%);
+            /* Slight overlay for readability */
+            padding: 40px;
+            border-radius: 24px;
+        }
+
+        .casestudy-header h1 {
+            text-shadow: 2px 2px 4px rgb(0, 0, 0);
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 57.6px;
+            letter-spacing: -0.02em;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .casestudy-header h3 {
+            text-shadow: 2px 2px 4px rgb(0, 0, 0);
+            font-size: 24px;
+            font-weight: 600;
+            line-height: 28.8px;
+            letter-spacing: -0.02em;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .casestudy-header p {
+            text-shadow: 2px 2px 4px rgb(0, 0, 0);
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 24px;
+            color: white;
+        }
+
+        .casestudy-content {
+            margin-top: 40px;
+        }
+
+        .casestudy-content h2 {
+            padding-top: 2%;
+            color: #5107B8;
+            font-size: 24px;
+            margin-bottom: 10px;
+            font-weight: 800;
+            line-height: 120%;
+            letter-spacing: -0.02em;
+        }
+
+        .casestudy-content p {
+            text-align: left;
+            padding-top: 2%;
+            color: #000000;
+            font-size: 20px;
+            margin-bottom: 10px;
+            font-weight: 400;
+            line-height: 120%;
+        }
+
+        .casestudy-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .feature-box {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            padding: 5%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-box h3 {
+            color: #5107B8;
+            font-size: 24px;
+            margin-bottom: 10px;
+            font-weight: 800;
+            line-height: 28.8px;
+        }
+
+        .feature-box ul {
+            list-style-type: disc;
+            padding-left: 20px;
+            text-align: left;
+            color: #000000;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 22.4px;
+        }
+
+        .feature-box ul li {
+            font-size: 16px;
+           line-height: 140%;
+            margin-bottom: 8px;
+            color: black;
+            background: white;
+            padding: 5px;
+            border-radius: 5px;
+            margin-bottom: 5px;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 1024px) {
+            .casestudy-header .overlay {
+                padding: 30px;
+            }
+
+            .casestudy-header h1 {
+                font-size: 36px;
+                line-height: 44px;
+            }
+
+            .casestudy-header h3 {
+                font-size: 20px;
+                line-height: 26px;
+            }
+
+            .casestudy-header p {
+                font-size: 18px;
+                line-height: 22px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .casestudy {
+                padding: 3%;
+            }
+
+            .casestudy-header .overlay {
+                padding: 20px;
+                justify-content: end;
+            }
+
+            .casestudy-header h1 {
+                font-size: 28px;
+                line-height: 34px;
+            }
+
+            .casestudy-header h3 {
+                font-size: 18px;
+                line-height: 24px;
+            }
+
+            .casestudy-header p {
+                font-size: 16px;
+                line-height: 20px;
+            }
+
+            .casestudy-content h2 {
+                font-size: 22px;
+            }
+
+            .casestudy-content p {
+                font-size: 18px;
+            }
+
+            .feature-box {
+                padding: 4%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .casestudy-header .overlay {
+                padding: 15px;
+            }
+
+            .casestudy-header h1 {
+                font-size: 24px;
+                line-height: 30px;
+            }
+
+            .casestudy-header h3 {
+                font-size: 16px;
+                line-height: 22px;
+            }
+
+            .casestudy-header p {
+                font-size: 14px;
+                line-height: 18px;
+            }
+
+            .casestudy-content h2 {
+                font-size: 20px;
+            }
+
+            .casestudy-content p {
+                font-size: 16px;
+            }
+
+            .feature-box {
+                padding: 3%;
+            }
+        }
+
+        .casestudycontent3 {
+            padding-left: 2.5%;
+            /* Maintain left padding */
+            line-height: 1.5em;
+            /* Adjust line spacing for readability */
+            font-size: 18px;
+            /* Slightly smaller for better mobile view */
+            font-weight: 400;
+            /* Keep font weight */
+            color: #333;
+            /* Dark gray text for better readability */
+        }
+
+        .casestudycontent3 li {
+            margin-bottom: 10px;
+            /* Space between items */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .casestudycontent3 {
+                font-size: 16px;
+                /* Reduce font size for smaller screens */
+                line-height: 1.4em;
+                padding-left: 5%;
+                /* Slightly increase left padding */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .casestudycontent3 {
+                font-size: 14px;
+                /* Further reduce font size for small screens */
+                line-height: 1.3em;
+            }
+        }
+
+        .casestudy-container {
+            position: relative;
+            /* Ensure positioning */
+            border-bottom: 2px solid #D9D9D9;
+            /* Black horizontal line */
+            padding-bottom: 90px;
+            /* Space between content and line */
+        }
+
+
+
+
+
+
+
+        .mobile-only {
+            display: none;
+            /* Hide by default */
+        }
+
+        @media screen and (max-width: 768px) {
+            .mobile-only {
+                display: block;
+                /* Show only on mobile */
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header id="header">
+        <div class="logo">
+            <a href="index.html"><img id="logo" src="hel.png" alt="Gritbyte Labs Logo" height="40"></a>
+        </div>
+        <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+        <nav id="nav-menu">
+            <div class="close-menu" onclick="toggleMenu()">×</div>
+            <a href="index.html" class="desktop-home"><i class="fas fa-home"></i></a>
+            <a href="index.html" class="mobile-only">Home</a>
+            <a href="Product.html">Products</a>
+            <a href="Solutions.html">Solutions</a>
+            <a href="Blog.html">Blog</a>
+            <a href="CaseStudy.html">Case Studies</a>
+            <a href="Contact.html">Contact Us</a>
+            <a href="Contact.html" class="cta-button">GET IN TOUCH</a>
+        </nav>
+    </header>
+
+    <section class="hero-section">
+        <div class="hero-background">
+            <img src="casestudy.png" alt="Hero Background">
+        </div>
+        <h1>Case Studies</h1>
+        <h3 style="color: white;text-align: left;">Unlock Innovation with AI & XR – Transforming Industries, Driving
+            Success</h3>
+        <p>At Gritbyte Labs, we engineer next-gen AI-powered XR solutions that redefine industries by enhancing
+            engagement, streamlining operations, and unlocking new revenue streams. From interactive 3D configurators to
+            AI-driven automation and immersive digital twins, our technologies empower businesses to scale, optimize,
+            and innovate like never before.</p>
+
+    </section>
+
+    <section class="casestudy">
+        <div class="casestudy-container">
+            <div class="casestudy-header">
+                <img src="casestudy1.png" alt="Mice Business Hub">
+                <div class="overlay">
+                    <h1>Mice</h1>
+                    <h3>A Cutting-Edge Business Mediation Hub in South Korea.</h3>
+                    <p>Revolutionizing Business Collaboration with Immersive Virtual Co-Working Spaces </p>
+                </div>
+            </div>
+            <div class="casestudy-content">
+                <h2>Challenge</h2>
+                <p>Mice, a prominent business mediation hub in South Korea, faced unprecedented disruptions due to
+                    COVID-19. The lack of in-person networking and collaboration opportunities significantly impacted
+                    global business interactions. Traditional video conferencing tools fell short in replicating the
+                    dynamic nature of face-to-face meetings, creating an urgent need for a more immersive, scalable, and
+                    interactive solution. </p>
+                <h2>Our AI-Driven, XR-Powered Solution</h2>
+                <p>We developed a virtual co-working space platform using cutting-edge 3D technology, featuring
+                    interactive product demonstrations, a multiplayer system, and a first-person shooter (FPS) style
+                    application. The platform included document sharing, voice communication, meeting rooms, and live
+                    streaming capabilities to replicate a physical co-working experience. </p>
+                <div class="casestudy-features">
+                    <div class="feature-box">
+                        <h3>Key Features & Innovations</h3>
+                        <ul>
+                            <li><strong>Immersive 3D Virtual Spaces :</strong> Built with high-fidelity rendering and
+                                spatial computing, creating lifelike meeting environments. </li>
+                            <li><strong>AI-Enabled Interactions :</strong> Integrated gesture recognition and
+                                conversational AI for natural and intuitive collaboration. </li>
+
+                            <li><strong>Multiplayer System & FPS-style Navigation :</strong>Fostered real-time,
+                                interactive business networking with a first-person movement system. 
+                            </li>
+                            <li><strong>Seamless Document Sharing & Voice Communication :</strong> Enabled instant file
+                                exchange, voice-based discussions, and live annotations for enhanced productivity. 
+                            </li>
+                            <li><strong>Metaverse-Ready Infrastructure :</strong> Future-proofed with blockchain
+                                integration, NFT-based access, and enterprise-level scalability. </li>
+                            <li><strong>Live Streaming & Product Demonstrations :</strong> Empowered businesses with
+                                high-engagement, real-time streaming capabilities for showcasing products and services. 
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="feature-box">
+                        <h3>Impact & Transformational Results</h3>
+                        <ul>
+                            <li><strong>Redefined Virtual Networking :</strong>Enabled businesses to transcend
+                                geographical barriers and engage with global clients in real time.</li>
+                            <li><strong>Boosted Client Engagement & Productivity :</strong>Provided a next-gen
+                                collaboration experience, significantly improving remote teamwork efficiency. </li>
+                            <li><strong>Positioned Mice as an Innovation Leader : </strong>Elevated the brand’s market
+                                positioning by integrating future-forward virtual collaboration tools. </li>
+                            <li><strong>Enabled Scalable, Borderless Business Interactions :</strong>Empowered startups
+                                and enterprises to network, pitch, and close deals seamlessly in a metaverse-ready
+                                environment. </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="casestudy">
+        <div class="casestudy-container">
+            <div class="casestudy-header">
+                <img src="casestudy2.png" alt="Reprosci Biosciences">
+                <div class="overlay">
+                    <h1>Reprosci Biosciences</h1>
+                    <h3>Pioneering Innovation in Assisted Reproductive Technology (ART)</h3>
+                    <p>Transforming ART Training with AI-Powered Simulation Technologies </p>
+                </div>
+            </div>
+            <div class="casestudy-content">
+                <h2>Challenge</h2>
+                <p>Bridging the Gap in ART Practitioner Training: Reprosci Biosciences, a leader in biotechnology and
+                    reproductive health, faced a critical challenge in training ART practitioners efficiently and
+                    safely. Traditional hands-on training was: </p>
+                <ul class="casestudycontent3">
+                    <li><strong>Time-intensive :</strong> Required prolonged live case experience. </li>
+                    <li><strong>Risk-prone :</strong> Risk-prone : Involved potential patient safety concerns. </li>
+                    <li><strong>Risk-prone :</strong> Risk-prone : Involved potential patient safety concerns. </li>
+                </ul>
+                <p>There was a pressing need for an immersive, technology-driven, and risk-free training solution that
+                    could standardize ART education globally. </p>
+
+                <h2>Our AI-Driven, XR-Powered Training Solution</h2>
+                <p>We developed a cutting-edge simulation-based training platform, combining AI, haptic feedback, and
+                    immersive virtual environments to create a realistic, hands-on learning experience—without patient
+                    risk</p>
+                <div class="casestudy-features">
+                    <div class="feature-box">
+                        <h3>Key Features & Innovations</h3>
+                        <ul>
+                            <li><strong>AI-Powered Ultrasound Case Generation :</strong> Dynamically creates complex
+                                cases for personalized training. </li>
+                            <li><strong>Haptic Feedback Integration :</strong> Provides lifelike tactile responses,
+                                ensuring a real-world procedural feel.</li>
+
+                            <li><strong>Gamified Learning Modules :</strong> Increases engagement through interactive,
+                                scenario-based training. 
+                            </li>
+                            <li><strong>Seamless Document Sharing & Voice Communication :</strong> Enabled instant file
+                                exchange, voice-based discussions, and live annotations for enhanced productivity. 
+                            </li>
+                            <li><strong>Realistic 3D Environments :</strong> Developed using Unity and Blender for
+                                ultra-realistic surgical and diagnostic simulations. </li>
+                            <li><strong>Compliance-Ready LMS :</strong> Aligned with ESHRE guidelines, ensuring global
+                                regulatory compliance and credibility. 
+                            </li>
+                            <li><strong>Scalable Cloud-Based Infrastructure :</strong> Allows remote access and
+                                multi-user collaboration, expanding ART education to a global audience. </li>
+                        </ul>
+                    </div>
+                    <div class="feature-box">
+                        <h3>Impact & Transformational Results</h3>
+                        <ul>
+                            <li><strong>50% Reduction in Training Time :</strong> Accelerated practitioner readiness
+                                with AI-driven adaptive learning. </li>
+                            <li><strong>Enhanced Proficiency & Patient Safety :</strong> Provided a risk-free
+                                environment to practice complex procedures. </li>
+                            <li><strong>Scalable, Global Learning Solution :</strong>Enabled remote, cost-effective
+                                training for ART professionals worldwide. </li>
+                            <li><strong>Redefined ART Training Standards :</strong>Positioned Reprosci Biosciences as a
+                                leader in digital reproductive healthcare training. </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="casestudy">
+        <div class="casestudy-container">
+            <div class="casestudy-header">
+                <img src="commercient.png" alt="Mice Business Hub">
+                <div class="overlay">
+                    <h1>Commercient</h1>
+                    <h3>Automation for Scalable ERP Customer Onboarding </h3>
+
+                </div>
+            </div>
+            <div class="casestudy-content">
+                <h2>Challenge</h2>
+                <p><strong>Inefficient, High-Cost Manual Onboarding :</strong> Inefficient, High-Cost Manual Onboarding:
+                    Our client, a leading global software enterprise, struggled
+                    with a time-intensive, resource-draining ERP customer onboarding process. The manual workflow
+                    allowed for only one customer onboarding at a time, leading to bottlenecks, increased operational
+                    costs, and suboptimal customer experiences. A scalable, AI-driven automation solution was essential
+                    to drive efficiency and enhance customer engagement. </p>
+                <h2>Our Cloud-Native Solution</h2>
+                <p>To transform and scale ERP onboarding, we built a next-generation, avatar-based AI assistant that
+                    seamlessly integrates with CRM and ERP ecosystems. This solution automated legal, IT, and compliance
+                    processes, significantly accelerating customer onboarding while ensuring precision and compliance. 
+                </p>
+                <div class="casestudy-features">
+                    <div class="feature-box">
+                        <h3>Key Features & Innovations</h3>
+                        <ul>
+                            <li><strong>Conversational AI & NLP-Powered Assistance :</strong> Enabled human-like
+                                interactions for an intuitive and engaging onboarding experience.  </li>
+                            <li><strong>End-to-End Automation :</strong> Streamlined contract management, IT setup, user
+                                provisioning, and compliance verification. </li>
+
+                            <li><strong>Multiplayer System & FPS-style Navigation :</strong>Fostered real-time,
+                                interactive business networking with a first-person movement system. 
+                            </li>
+                            <li><strong>Seamless ERP & CRM Integration :</strong> Ensured real-time data synchronization
+                                for frictionless onboarding workflows. 
+                            </li>
+                            <li><strong>Scalable Cloud Infrastructure (AWS-Powered) :</strong> Provided high
+                                availability, security, and limitless scalability for global operations. </li>
+                            <li><strong>Machine Learning-Driven Optimization :</strong> Enabled self-learning
+                                capabilities, continuously enhancing efficiency and accuracy.  
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="feature-box">
+                        <h3>Impact & Transformational Results</h3>
+                        <ul>
+                            <li><strong>Scalable, High-Speed Onboarding :</strong> Enabled parallel processing of
+                                multiple customer onboardings, eliminating bottlenecks. </li>
+                            <li><strong>Massive Cost Reduction :</strong> Optimized resources, reducing the support team
+                                from 200 to just 20, cutting operational expenses by over 90%.  </li>
+                            <li><strong>Seamless Global Scalability : </strong> Allowed for effortless expansion,
+                                handling customers across diverse regions with zero friction.</li>
+                            <li><strong>Enhanced Market Positioning :</strong> Established the client as a tech-driven
+                                innovator, leveraging AI and automation for unmatched efficiency. </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="casestudy">
+        <div class="casestudy-container">
+            <div class="casestudy-header">
+                <img src="casestudy4.png" alt="Mice Business Hub">
+                <div class="overlay">
+                    <h1>Bosch Rexroth</h1>
+                    <h3>A Global Leader in Hydraulics & Automation</h3>
+                    <p>Revolutionizing Component Assembly Training with Immersive VR Technology</p>
+                </div>
+            </div>
+            <div class="casestudy-content">
+                <h2>Challenge</h2>
+                <p><strong>Bridging the Skills Gap in Industrial Training :</strong> Bosch Rexroth, a trailblazer in
+                    hydraulics and
+                    automation, faced significant inefficiencies in training blue-collar workers for component assembly.
+                    Traditional training methods—reliant on manuals and handbooks—were time-consuming, lacked
+                    interactivity, and demanded continuous supervision from senior professionals. The need for a
+                    scalable, engaging, and cost-effective training solution became critical. </p>
+                <h2>Our XR-Enhanced VR Training Solution</h2>
+                <p>To address this, we engineered a cutting-edge VR-based training platform that transforms conventional
+                    training into an immersive, gamified, and data-driven experience.</p>
+                <div class="casestudy-features">
+                    <div class="feature-box">
+                        <h3>Key Features & Innovations</h3>
+                        <ul>
+                            <li><strong>Immersive Virtual Lab :</strong> Designed a high-fidelity, physics-accurate VR
+                                training environment, replicating real-world assembly scenarios. </li>
+                            <li><strong>Gamified Learning with AI-Driven Feedback :</strong> Integrated quest-style
+                                training modules that boost engagement while AI provides real-time skill assessment and
+                                corrective guidance. </li>
+
+                            <li><strong>Dual-Module Structure (Training & Evaluation) :</strong> Implemented a
+                                structured approach, allowing users to learn, practice, and be evaluated in a
+                                controlled, risk-free environment. 
+                            </li>
+                            <li><strong>Data-Driven Performance Analytics :</strong> Captured and analyzed trainee
+                                efficiency, accuracy, and skill progression using real-time analytics and AI-powered
+                                insights. 
+                            </li>
+                            <li><strong>Standardized, Scalable Workforce Training :</strong> Enabled consistent,
+                                high-quality, and repeatable training across global teams, ensuring error reduction and
+                                process standardization.  </li>
+
+                        </ul>
+                    </div>
+                    <div class="feature-box">
+                        <h3>Impact & Transformational Results</h3>
+                        <ul>
+                            <li><strong>50% Reduction in Training Time & Costs :</strong> Optimized training workflows,
+                                reducing reliance on physical resources and human trainers</li>
+                            <li><strong> Enhanced Engagement & Knowledge Retention :</strong> Delivered interactive,
+                                hands-on learning experiences that significantly improved skill acquisition.  </li>
+                            <li><strong> Increased Workforce Efficiency & Precision : </strong> Empowered trainees with
+                                real-world simulations, minimizing errors in actual assembly processes. </li>
+                            <li><strong>Scalable & Future-Ready Training :</strong> Future-proofed workforce development
+                                with a flexible, AI-enhanced, and XR-powered training ecosystem. </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="casestudy">
+        <div class="casestudy-container">
+            <div class="casestudy-header">
+                <img src="casestudy5.png" alt="Mice Business Hub">
+                <div class="overlay">
+                    <h1>HIRA</h1>
+                    <h3>A Market Leader in Construction Solutions across MENA </h3>
+                    <p>Revolutionizing Construction Product Presentations with Immersive VR </p>
+                </div>
+            </div>
+            <div class="casestudy-content">
+                <h2>Challenge</h2>
+                <p><strong>Bridging the Gap Between Physical Products and Digital Demonstrations :</strong> HIRA, a
+                    leading construction solutions provider in the MENA region, faced a critical challenge—how to
+                    effectively showcase large-scale products like ducting, insulation, and ventilation systems without
+                    the logistical hurdles of physical transportation. Traditional methods such as brochures and 2D
+                    presentations lacked the impact needed to drive engagement at trade shows, client meetings, and
+                    product pitches. </p>
+                <h2>Our XR-Powered Solution</h2>
+                <p>To overcome these limitations, we developed a hyper-realistic virtual construction site using Unity
+                    and Blender, integrating Virtual Reality (VR), real-time 3D rendering, and AI-powered interactions.
+                    This solution provided an interactive, hands-on product experience—without the constraints of
+                    physical space. </p>
+                <div class="casestudy-features">
+                    <div class="feature-box">
+                        <h3>Key Features & Innovations</h3>
+                        <ul>
+                            <li><strong>Immersive Virtual Lab :</strong> Designed a high-fidelity, physics-accurate VR
+                                training environment, replicating real-world assembly scenarios. </li>
+                            <li><strong>Gamified Learning with AI-Driven Feedback :</strong> Integrated quest-style
+                                training modules that boost engagement while AI provides real-time skill assessment and
+                                corrective guidance. </li>
+
+                            <li><strong>Dual-Module Structure (Training & Evaluation) :</strong> Implemented a
+                                structured approach, allowing users to learn, practice, and be evaluated in a
+                                controlled, risk-free environment. 
+                            </li>
+                            <li><strong>Data-Driven Performance Analytics :</strong> Captured and analyzed trainee
+                                efficiency, accuracy, and skill progression using real-time analytics and AI-powered
+                                insights. 
+                            </li>
+                            <li><strong>Standardized, Scalable Workforce Training :</strong> Enabled consistent,
+                                high-quality, and repeatable training across global teams, ensuring error reduction and
+                                process standardization.  </li>
+
+                        </ul>
+                    </div>
+                    <div class="feature-box">
+                        <h3>Impact & Transformational Results</h3>
+                        <ul>
+                            <li><strong>50% Reduction in Training Time & Costs :</strong> Optimized training workflows,
+                                reducing reliance on physical resources and human trainers</li>
+                            <li><strong> Enhanced Engagement & Knowledge Retention :</strong> Delivered interactive,
+                                hands-on learning experiences that significantly improved skill acquisition.  </li>
+                            <li><strong> Increased Workforce Efficiency & Precision : </strong> Empowered trainees with
+                                real-world simulations, minimizing errors in actual assembly processes. </li>
+                            <li><strong>Scalable & Future-Ready Training :</strong> Future-proofed workforce development
+                                with a flexible, AI-enhanced, and XR-powered training ecosystem. </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="casestudy">
+        <div class="casestudy-container">
+            <div class="casestudy-header">
+                <img src="casestudy6.png" alt="Mice Business Hub">
+                <div class="overlay">
+                    <h1>ADNOC (Abu Dhabi National Oil Company) </h1>
+                    <h3>Revolutionizing Oil Refinery Tours with XR-Powered Innovation</h3>
+                </div>
+            </div>
+            <div class="casestudy-content">
+                <h2>Challenge</h2>
+                <p><strong>Bridging the Gap Between Innovation and Accessibility :</strong> As a global energy leader,
+                    ADNOC faced significant challenges in conducting on-site refinery tours. These visits were
+                    logistically complex, operationally disruptive, and costly, requiring skilled personnel for
+                    supervision. The need for an immersive, scalable, and technology-driven alternative became critical
+                    to enhance accessibility and engagement without compromising daily operations. </p>
+                <h2>Our XR-Powered Solution</h2>
+                <p>To transform ADNOC’s visitor experience, we developed a cutting-edge XR-based virtual tour platform,
+                    leveraging the latest in Augmented Reality (AR), Mixed Reality (MR), and 3D visualization. This
+                    next-gen platform delivers an interactive, high-fidelity digital twin of ADNOC’s production
+                    facilities, offering a hyper-realistic, self-guided exploration of refinery operations.</p>
+                <div class="casestudy-features">
+                    <div class="feature-box">
+                        <h3>Key Features & Innovations</h3>
+                        <ul>
+                            <li><strong>Photorealistic 3D Digital Twins :</strong> Created with AI-powered rendering and
+                                spatial computing for ultra-realistic facility representations.</li>
+                            <li><strong>Immersive AR & MR Interactivity :</strong> Integrated real-time object
+                                interaction, gesture-based controls, and AI-driven voice guidance. </li>
+
+                            <li><strong>Scalable & Remote Accessibility :</strong> Enabled global stakeholders,
+                                partners, and trainees to experience refinery operations from anywhere, on any device. 
+                            </li>
+                            <li><strong>AI-Enhanced Learning & Simulation :</strong> Delivered interactive educational
+                                modules, live process simulations, and predictive analytics for enhanced understanding. 
+                            </li>
+                            <li><strong>Sustainability & ESG Integration :</strong> Showcased ADNOC’s green initiatives,
+                                carbon capture
+                                technologies, and renewable energy advancements in an engaging format. </li>
+                                <li><strong>Seamless Multi-User Collaboration :</strong> Allowed teams, investors, and regulators to engage in real-time discussions within the virtual refinery space.  
+                                </li>
+                        </ul>
+                    </div>
+                    <div class="feature-box">
+                        <h3>Impact & Transformational Results</h3>
+                        <ul>
+                            <li><strong>Eliminated Operational Disruptions :</strong> Reduced on-site foot traffic, allowing uninterrupted refinery processes while maintaining engagement. </li>
+                            <li><strong>Enhanced Learning & Visitor Experience :</strong> Enabled stakeholders to understand complex oil & gas workflows intuitively through AI-driven storytelling. 
+                             </li>
+                            <li><strong> Strengthened ADNOC’s ESG & Innovation Leadership : </strong> Reinforced the company’s commitment to sustainability and digital transformation.</li>
+                            <li><strong>Optimized Costs & Efficiency :</strong> Minimized expenses associated with logistics, staffing, and security for facility tours. </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="casestudy">
+        <div class="casestudy-container">
+            <div class="casestudy-header">
+                <img src="casestudy7.png" alt="Mice Business Hub">
+                <div class="overlay">
+                    <h1>Aircraft Maintenance Facility</h1>
+                    <h3>Revolutionizing Aircraft Maintenance Training with Immersive VR</h3>
+                </div>
+            </div>
+            <div class="casestudy-content">
+                <h2>Client Problem</h2>
+                <p>Traditional training for penetrant paint flaw detection was costly, inefficient, and posed safety
+                    risks. The client needed a scalable, high-fidelity, and risk-free solution to enhance professional
+                    skill development. </p>
+                <div class="casestudy-features">
+                    <div class="feature-box">
+                        <h3>Our XR-Driven Solution</h3>
+                        <ul>
+                            <li><strong>Hyper-Realistic VR Training Platform :</strong> Created an interactive,
+                                physics-based environment replicating real-world conditions. </li>
+                            <li><strong>Gamified Learning with AI-Driven Feedback :</strong> Integrated quest-style
+                                training modules that boost engagement while AI provides real-time skill assessment and
+                                corrective guidance. </li>
+
+                            <li><strong>Advanced 3D Simulations & Haptic Feedback :</strong> Enabled hands-on,
+                                precision-based training for penetrant paint techniques. 
+                            </li>
+                            <li><strong>AI-Enabled Performance Tracking :</strong> Integrated real-time analytics to
+                                assess skill development and optimize learning. 
+                            </li>
+                            <li><strong>Step-by-Step Guided Training Modules :</strong> Provided structured gamified
+                                learning experiences for maximum retention. </li>
+
+                        </ul>
+                    </div>
+                    <div class="feature-box">
+                        <h3>Impact & Results</h3>
+                        <ul>
+                            <li><strong>Enhanced Workforce Skill Development :</strong> Improved accuracy and efficiency
+                                in flaw detection. </li>
+                            <li><strong>Reduced Training Costs :</strong> Eliminated expenses on consumables like
+                                penetrant paints. </li>
+                            <li><strong>Zero-Risk Learning Environment : </strong> Ensured safety and compliance in
+                                skill-building. </li>
+                            <li><strong>Boosted Engagement & Retention :</strong> Leveraged interactive learning to
+                                enhance trainee success. </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="casestudy">
+        <div class="casestudy-container">
+            <div class="casestudy-header">
+                <img src="motek.png" alt="Mice Business Hub">
+                <div class="overlay">
+                    <h1>Motek Healthcare</h1>
+                    <h3>Transforming Yoga Practice with Virtual Reality</h3>
+                </div>
+            </div>
+            <div class="casestudy-content">
+                <h2>Challenge</h2>
+                <p><strong>Bridging the Gap in Personalized Yoga Instruction :</strong> Motek Healthcare, a leading
+                    global healthtech company, sought an innovative way to provide consistent, engaging, and accessible
+                    yoga instruction to a diverse user base in Israel. Traditional methods lacked personalization,
+                    real-time adaptability, and the immersive experience necessary to maintain long-term engagement.</p>
+                <h2>Our XR-Powered Solution</h2>
+                <p>To bridge this gap, we developed a cutting-edge VR yoga platform powered by AI-driven virtual
+                    instruction, spatial computing, and immersive wellness technology. Our solution redefined home-based
+                    yoga practice by integrating real-time posture guidance, dynamic environments, and biometric
+                    tracking for a truly next-gen digital wellness experience.  </p>
+                <div class="casestudy-features">
+                    <div class="feature-box">
+                        <h3>Key Features & Innovations</h3>
+                        <ul>
+                            <li><strong>AI-Powered Virtual Yoga Instructor :</strong> Delivered realistic
+                                motion-captured animations with adaptive, multilingual voice guidance. </li>
+                            <li><strong>Immersive 3D Environments :</strong> Customizable beaches, forests, mountain
+                                retreats designed to elevate relaxation and focus. </li>
+
+                            <li><strong>Real-Time Biometric Feedback :</strong> Implemented a
+                                structured approach, allowing users to learn, practice, and be evaluated in a
+                                controlled, risk-free environment. 
+                            </li>
+                            <li><strong>Neuroscience-Backed Soundscapes :</strong> Implemented AI-curated ambient sounds
+                                for enhanced mindfulness and stress reduction. 
+                            </li>
+                            <li><strong>Personalized Learning Paths :</strong> AI-generated routines based on user
+                                progress, flexibility levels, and wellness goals. </li>
+
+                        </ul>
+                    </div>
+                    <div class="feature-box">
+                        <h3>Impact & Transformational Results</h3>
+                        <ul>
+                            <li><strong>Scalable, AI-Driven Yoga Instruction :</strong> Provided a 24/7 virtual
+                                instructor, ensuring consistent, high-quality guidance for users worldwide. </li>
+                            <li><strong>Increased User Engagement & Retention :</strong> Gamified experiences and
+                                interactive feedback loops encouraged habit formation and regular practice. </li>
+                            <li><strong>Accessibility & Inclusivity : </strong> Offered multilingual support and
+                                adaptive difficulty levels, making yoga accessible to all age groups and skill levels. 
+                            </li>
+                            <li><strong>Revolutionizing Digital Health & Wellness :</strong> Positioned Motek Healthcare
+                                as a trailblazer in AI-powered holistic wellness solutions. </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="casestudy">
+        <div class="casestudy-container">
+            <div class="casestudy-header">
+                <img src="casestudy9.png" alt="Mice Business Hub">
+                <div class="overlay">
+                    <h1>ArcelorMittal</h1>
+                    <h3>Empowering Tomorrow’s Workforce with Immersive Mixed Reality for Industry 4.0</h3>
+                </div>
+            </div>
+            <div class="casestudy-content">
+                <h2>Challenge</h2>
+                <p><strong>Bridging the Skills Gap in the Manufacturing Sector</strong> India’s manufacturing sector
+                    faced a critical shortage of skilled mechanical engineers, largely due to outdated training methods
+                    and limited hands-on learning opportunities. A premier educational institute sought to attract and
+                    retain top talent while enhancing employability through industry-relevant, experiential learning.
+                </p>
+                <p>Traditional classroom training lacked the interactive, real-world application needed to prepare
+                    students for Industry 4.0, resulting in a disconnect between theoretical knowledge and practical
+                    execution. </p>
+                <h2>Our Future-Ready Mixed Reality (MR) Training Solution</h2>
+                <p>To revolutionize engineering education, we developed a cutting-edge Mixed Reality (MR) training
+                    platform, blending AI-powered simulations, interactive 3D models, and real-time performance
+                    analytics to create a truly immersive learning experience. </p>
+
+                <div class="casestudy-features">
+                    <div class="feature-box">
+                        <h3>Key Features & Innovations</h3>
+                        <ul>
+                            <li><strong>Immersive Digital Twin Technology :</strong> Enabled students to visualize,
+                                interact with, and manipulate complex mechanical components in a hyper-realistic MR
+                                environment. </li>
+                            <li><strong>AI-Driven Adaptive Learning :</strong> Personalized training modules using
+                                machine learning algorithms to analyze student performance and offer tailored guidance. 
+                            </li>
+
+                            <li><strong>Gamified Learning & Real-Time Assessments :</strong> Boosted engagement through
+                                interactive simulations, virtual labs, and instant feedback mechanisms. 
+                            </li>
+                            <li><strong>Seamless Integration with Industry 4.0 Frameworks :</strong> Ensured
+                                compatibility with smart manufacturing ecosystems, IoT-enabled devices, and cloud-based
+                                learning management systems. 
+                            </li>
+                            <li><strong>Multi-User Collaborative Training :</strong>Enabled real-time, interactive
+                                learning experiences, allowing students and instructors to collaborate in shared virtual
+                                spaces. </li>
+                            <li><strong>Haptic Feedback & XR Enhancements</strong>Provided real-world tactility to
+                                training modules, improving muscle memory and practical skill acquisition.  </li>
+
+                        </ul>
+                    </div>
+                    <div class="feature-box">
+                        <h3>Impact & Transformational Results </h3>
+                        <ul>
+                            <li><strong>Increased Student Enrollment & Retention :</strong> Transformed traditional
+                                learning into an engaging, career-driven experience, attracting tech-savvy engineering
+                                aspirants. </li>
+                            <li><strong>Bridged the Industry-Academia Gap :</strong> Empowered students with real-world,
+                                hands-on training, reducing the learning curve for industry jobs.</li>
+                            <li><strong> 
+                                    Established the Institute as an EdTech Pioneer : </strong> Positioned the
+                                institution as a leader in next-gen, immersive education, setting new standards for
+                                technical training excellence. 
+                            </li>
+                            <li><strong>Addressed India’s Skilled Workforce Shortage :</strong> Created a pipeline of
+                                job-ready engineers, directly contributing to the growth of India’s manufacturing and
+                                smart factory ecosystems. </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="casestudy">
+        <div class="casestudy-container">
+            <div class="casestudy-header">
+                <img src="casestudy10.png" alt="Mice Business Hub">
+                <div class="overlay">
+                    <h1>ERESHA</h1>
+                    <h2>Elevating Aviator Training with Cutting-Edge VR Simulation</h2>
+                </div>
+            </div>
+            <div class="casestudy-content">
+                <h2>Challenge</h2>
+                <p>Traditional aviation training methods struggled to keep pace with the evolving demands of modern
+                    pilots and crew members. The lack of real-world immersion, hands-on interactivity, and adaptive
+                    learning environments resulted in low engagement, slower skill acquisition, and reduced emergency
+                    preparedness. ERESHA needed a next-gen solution to transform training effectiveness and bridge the
+                    gap between theory and real-world execution. 
+                </p>
+                <p>Traditional classroom training lacked the interactive, real-world application needed to prepare
+                    students for Industry 4.0, resulting in a disconnect between theoretical knowledge and practical
+                    execution. </p>
+                <h2>Our XR-Driven Solution </h2>
+                <p>To redefine aviation training, we engineered an ultra-realistic Virtual Reality (VR) training program
+                    designed to simulate high-stakes scenarios, optimize skill development, and enhance situational
+                    awareness.</p>
+
+                <div class="casestudy-features">
+                    <div class="feature-box">
+                        <h3>Key Features & Innovations</h3>
+                        <ul>
+                            <li><strong>Hyper-Realistic Cockpit Familiarization :</strong> A fully interactive VR
+                                cockpit module allowing trainees to navigate controls, instrument panels, and flight
+                                systems in a risk-free environment. </li>
+                            <li><strong>Mobile-Compatible Cabin Exploration :</strong> Designed a scalable,
+                                device-agnostic VR experience that enables trainees to engage in detailed cabin
+                                walkthroughs from anywhere. 
+                            </li>
+
+                            <li><strong>Emergency Procedure Simulation :</strong> Implemented high-fidelity crisis
+                                scenarios to train pilots and crew in rapid decision-making, emergency landings, and
+                                evacuation drills. 
+                            </li>
+                            <li><strong>AI-Driven Adaptive Learning :</strong> Integrated real-time performance tracking
+                                and AI-powered feedback systems to personalize training programs and optimize
+                                retention. 
+                            </li>
+                            <li><strong>Haptic Feedback & Multi-Sensory Engagement :</strong>Enabled real-time,
+                                interactive
+                                learning experiences, allowing students and instructors to collaborate in shared virtual
+                                spaces. </li>
+
+                        </ul>
+                    </div>
+                    <div class="feature-box">
+                        <h3>Impact & Transformational Results </h3>
+                        <ul>
+                            <li><strong>Enhanced Decision-Making & Reaction Times :</strong> Trainees improved
+                                situational awareness, cognitive load management, and emergency response efficiency. 
+                            </li>
+                            <li><strong>Increased Engagement & Retention :</strong> Immersive training led to higher
+                                knowledge retention and accelerated skill mastery. </li>
+                            <li><strong> 
+                                    Industry Recognition & Airline Adoption : </strong> The solution attracted leading
+                                commercial airlines looking to modernize their pilot and crew training programs. 
+                            </li>
+                            <li><strong>Elevated Safety & Compliance Standards :</strong> Strengthened global aviation
+                                safety protocols by aligning VR simulations with real-world FAA, EASA, and ICAO
+                                standards.  </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="casestudy">
+        <div class="casestudy-container">
+            <div class="casestudy-header">
+                <img src="casestudy10.png" alt="Mice Business Hub">
+                <div class="overlay">
+                    <h1>Soundscapes Unleashed</h1>
+                    <h3>Revolutionizing Artist Promotion & Fan Engagement with VR</h3>
+                </div>
+            </div>
+            <div class="casestudy-content">
+                <h2>Challenge</h2>
+                <p>In today’s digital-first music industry, emerging artists struggle to gain visibility, engage fans,
+                    and streamline operations without incurring high marketing and management costs. Our client, a
+                    musician and entrepreneur, needed a cutting-edge solution to break through the noise, create
+                    immersive fan experiences, and drive sustainable revenue growth.
+                </p>
+                <p>Traditional classroom training lacked the interactive, real-world application needed to prepare
+                    students for Industry 4.0, resulting in a disconnect between theoretical knowledge and practical
+                    execution. </p>
+                <h2>Our XR-Driven Solution </h2>
+                <p>We built a next-gen VR-powered digital platform, leveraging immersive storytelling, multiplayer
+                    interaction, and real-time content updates to transform artist-fan engagement. </p>
+
+                <div class="casestudy-features">
+                    <div class="feature-box">
+                        <h3>Key Features & Innovations</h3>
+                        <ul>
+                            <li><strong>Virtual Music Gallery :</strong> A metaverse-inspired space where fans explore
+                                artists, discographies, and exclusive content in a dynamic, AI-enhanced environment. 
+                            </li>
+                            <li><strong>Immersive 180° VR Concert Experiences :</strong> Transported fans to
+                                hyper-realistic, interactive live performances with spatial audio and motion-tracked
+                                visuals. 
+                            </li>
+
+                            <li><strong>Multiplayer Social Hub :</strong> Enabled real-time fan interactions, live Q&A
+                                sessions, and community-driven events with AI-driven engagement analytics. 
+                            </li>
+                            <li><strong>Hot Feed & Live Updates :</strong> Delivered AI-curated recommendations on new
+                                releases, exclusive behind-the-scenes content, and upcoming events. 
+                            </li>
+                            <li><strong>Monetization & Brand Partnerships :</strong> Integrated NFT-based ticketing,
+                                virtual merch sales, and sponsored brand activations to create scalable revenue
+                                streams.  </li>
+
+                        </ul>
+                    </div>
+                    <div class="feature-box">
+                        <h3>Impact & Transformational Results </h3>
+                        <ul>
+                            <li><strong>Amplified Artist Visibility & Global Reach :</strong> Expanded fanbases through
+                                high-impact, immersive digital experiences.
+                            </li>
+                            <li><strong>Optimized Artist Operations :</strong> Reduced management overhead with an
+                                AI-driven, automated platform, freeing up time for creative work.  </li>
+                            <li><strong> 
+                                     
+                                    Revolutionized Fan Engagement : </strong> Created an interactive, gamified
+                                experience, fostering deep emotional connections between artists and their audiences. 
+                            </li>
+                            <li><strong>Boosted Revenue & Brand Partnerships :</strong> Opened new monetization avenues
+                                through ticketed VR events, digital collectibles, and branded collaborations.  </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <section class="casestudy">
+        <div class="casestudy-container">
+            <div class="casestudy-header">
+                <img src="pfizer.png" alt="Mice Business Hub">
+                <div class="overlay">
+                    <h1>Pfizer</h1>
+                    <h3>A Global Leader in Pharmaceutical Innovation</h3>
+                    <p>Revolutionizing RTD Calibration Training in Pharma with Immersive VR Technology</p>
+                </div>
+            </div>
+            <div class="casestudy-content">
+                <h2>Challenge</h2>
+                <p><strong>Bridging the Gap in RTD Calibration Training : </strong> Pfizer faced a significant challenge
+                    in training new hires on RTD (Resistance Temperature Detector) and thermocouple calibration.
+                    Traditional training methods were : </p>
+
+                <ul class="casestudycontent3">
+                    <li><strong>Theoretical & Inefficient :</strong> Lacked hands-on experience, leading to longer
+                        learning curves.</li>
+                    <li><strong>Resource-Intensive :</strong> Required expert supervision, pulling skilled professionals
+                        away from core operations. </li>
+                    <li><strong>Limited Scalability :</strong> Couldn’t support the growing workforce demands in a
+                        rapidly evolving industry. </li>
+                </ul>
+                <p>Pfizer needed a cutting-edge, scalable, and interactive training solution that could enhance learning
+                    retention, accelerate onboarding, and reduce dependency on senior technicians. </p>
+                <h2>Our XR-Driven Solution </h2>
+                <p>To address these challenges, we designed and deployed a state-of-the-art Virtual Reality (VR)
+                    training platform—an immersive, hands-on, and interactive learning experience tailored for
+                    pharmaceutical calibration processes. </p>
+                <div class="casestudy-features">
+                    <div class="feature-box">
+                        <h3>Key Features & Innovations</h3>
+                        <ul>
+                            <li><strong>Immersive VR Simulation :</strong> Enabled real-world, hands-on experience
+                                without disrupting live production environments. 
+                            </li>
+                            <li><strong>AI-Enhanced Learning Modules :</strong> Integrated adaptive learning algorithms
+                                to personalize training and track progress. 
+                            </li>
+
+                            <li><strong>Real-Time Feedback & Performance Analytics :</strong> Provided instant
+                                corrective insights to optimize trainee proficiency. 
+                            </li>
+                            <li><strong>Industry-Compliant Calibration Techniques :</strong> Ensured alignment with FDA,
+                                GMP, and ISO standards, reinforcing regulatory adherence. 
+                            </li>
+                            <li><strong>Scalable & Remote-Accessible Training :</strong> Allowed seamless global
+                                workforce training, reducing travel and operational downtime. </li>
+
+                        </ul>
+                    </div>
+                    <div class="feature-box">
+                        <h3>Impact & Transformational Results </h3>
+                        <ul>
+                            <li><strong>Reduction in Training Time :</strong> Accelerated onboarding with a faster, more
+                                efficient learning curve. 
+                            </li>
+                            <li><strong> 
+                                    30% Increase in Knowledge Retention :</strong> Engaging, experiential learning
+                                enhanced skill mastery and confidence. </li>
+                            <li><strong>Optimized Resource Utilization : </strong> Freed up senior technicians for
+                                high-priority tasks, boosting overall productivity.
+                            </li>
+                            <li><strong> 
+                                    Scalable & Future-Ready Workforce :</strong> Enabled seamless expansion with
+                                next-gen training methodologies. </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="future-proof-section">
+        <div class="container60">
+            <div class="headline60">
+                <span>Future-proof your business in 2025.</span>
+                <span>Explore how Gritbyte Labs can empower your industry.</span>
+            </div>
+            <a href="Contact.html" class="button60">
+                Get in Touch <span class="arrow">→</span>
+            </a>
+        </div>
+    </div>
+    <footer class="footer">
+        <hr>
+        <div class="footer-container">
+            <div class="footer-column">
+                <div class="footer-text">
+                    <p>At Gritbyte Labs, we specialize in XR, AI, and scalable technology solutions that empower
+                        businesses worldwide. With 260+ successful projects across 20+ countries, we’re your trusted
+                        partner for innovation.</p>
+                    <a href="#" class="arrow">&#10145;</a>
+                </div>
+                <div class="certified-trusted">
+                    <div class="certified">
+                        <p>Certified by</p>
+                        <img src="certified.png" alt="Certified">
+                    </div>
+                    <div class="trusted">
+                        <p>Trusted by</p>
+                        <div class="trusted-images">
+                            <img src="pfzier.png" alt="Trusted">
+                            <img src="Hundai.png" alt="Trusted">
+                            <img src="bosch.png" alt="Trusted">
+                            <img src="rexorth.png" alt="Trusted">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-column">
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="Product.html">Products</a>
+                    <a href="Solutions.html">Solutions</a>
+                    <a href="Blog.html">Blog</a>
+                    <a href="CaseStudy.html">Case Studies</a>
+                    <a href="Contact.html">Contact Us</a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/gritbyte/"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.linkedin.com/company/gritbytelabs/"><i class="fab fa-linkedin-in"></i></a>
+                    <!-- <a href="#"><i class="fab fa-x-twitter"></i></a> -->
+
+                    <a href="https://www.instagram.com/gritbyte/?hl=en"><i class="fab fa-instagram"></i></a>
+                </div>
+                <hr>
+                <div class="contact-info">
+                    <p><i class="fas fa-phone"></i> <a href="tel:+918431962626">+91-8431962626</a></p>
+                    <p><i class="fas fa-envelope"></i> <a href="mailto:contact@gritbyte.com">contact@gritbyte.com</a>
+                    </p>
+                </div>
+                <hr>
+                <div class="location-row">
+                    <div class="location">
+                        <img src="India (IN).png" alt="Location">
+                        <p>Bangalore<br>Mysuru</p>
+                    </div>
+                    <div class="vertical-line"></div> <!-- Line between columns -->
+
+                    <div class="location">
+                        <img src="South Korea (KR).png" alt="Location">
+                        <p>Seoul</p>
+                    </div>
+                    <div class="vertical-line"></div>
+
+                    <div class="location">
+                        <img src="United Kingdom (GB).png" alt="Location">
+                        <p>London</p>
+                    </div>
+                    <div class="vertical-line"></div>
+
+                    <div class="location">
+                        <img src="Canada (CA).png" alt="Location">
+                        <p>Toronto</p>
+                    </div>
+                    <div class="vertical-line"></div>
+
+                    <div class="location">
+                        <img src="United Arab Emirates (AE).png" alt="Location">
+                        <p>Downtown <br>Dubai</p>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+        <hr>
+    </footer>
+    <div class="footer-bottom">
+        <p style="font-weight: bold;color: #000;" class="copyright">&copy; 2025 Gritbyte Labs. All Rights Reserved.</p>
+        <div class="footer-links-bottom">
+            <a href="TermsofUse.html">Terms & Conditions </a> |
+            <a href="FAQ.html">FAQs </a> |
+            <a href="PrivacyPolicy.html">Privacy Policy </a>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("contextmenu", function (event) {
+            event.preventDefault();
+        });
+
+        document.addEventListener("keydown", function (event) {
+            if (event.ctrlKey && (event.key === "u" || event.key === "U" || event.key === "i" || event.key === "I")) {
+                event.preventDefault();
+            }
+            if (event.key === "F12" || (event.ctrlKey && event.shiftKey && event.key === "I")) {
+                event.preventDefault();
+            }
+        });
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const elements = document.querySelectorAll(
+                ".casestudy-content h2,.feature-box h3"
+            );
+
+            function revealOnScroll() {
+                elements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+
+                    if (elementTop < windowHeight - 100) {
+                        element.classList.add("reveal");
+                    }
+                });
+            }
+
+            window.addEventListener("scroll", revealOnScroll);
+            revealOnScroll(); // Run on page load in case elements are already in view
+        });
+
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const images = document.querySelectorAll(".casestudy-header img"); // Select all images
+
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add("show"); // Apply animation to each image
+                        }
+                    });
+                },
+                { threshold: 0.3 } // Triggers when 30% of the image is visible
+            );
+
+            images.forEach((img) => observer.observe(img)); // Observe all images
+        });
+
+
+    </script>
+    <script>
+        function toggleMenu() {
+            document.getElementById("nav-menu").classList.toggle("open");
+        }
+
+        const header = document.getElementById('header');
+        const logoImage = document.getElementById('logo');
+        const ctaButton = document.querySelector('.cta-button'); // Select the button
+        const originalLogoSrc = 'hel.png';
+        const scrolledLogoSrc = 'Gritbyte Logo 1 (1).png';
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+                logoImage.src = scrolledLogoSrc;
+                ctaButton.style.color = 'white'; // Keep text color white
+            } else {
+                header.classList.remove('scrolled');
+                logoImage.src = originalLogoSrc;
+                ctaButton.style.color = 'white'; // Ensure text remains white
+            }
+        });
+    </script>
+
+</body>
+
+</html>
