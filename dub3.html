@@ -55,7 +55,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 100px 20px; /* Increased gap above and below */
+            padding: 80px 20px;
         }
 
         .divider {
@@ -115,6 +115,20 @@
         }
 
         .dot.active { background: #555; }
+
+        @media (max-width: 768px) {
+            .testimonials {
+                width: 400%;
+            }
+            .testimonial-card {
+                width: 100%;
+                margin: 0;
+            }
+            .prev, .next {
+                font-size: 18px;
+                padding: 8px;
+            }
+        }
     </style>
 </head>
 <body>
