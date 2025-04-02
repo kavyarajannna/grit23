@@ -672,74 +672,60 @@
         .container94 {
             width: 90%;
             margin: 50px auto;
-
-
         }
 
         .container94 h2 {
-            font-size: 48px;
-            font-weight: 700;
+            font-size: 32px;
+            font-weight: 900;
             line-height: 57.6px;
             letter-spacing: -0.02em;
-            /* Approx. -2% letter spacing */
             text-align: left;
             margin-bottom: 3%;
         }
 
+        .testimonial-carousel {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+
         .testimonials {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            /* Center cards */
-            gap: 20px;
-            /* Space between cards */
-            width: 100%;
-            padding: 0;
+            transition: transform 0.5s ease-in-out;
+            width: 200%;
         }
 
         .testimonial-card {
+            width: 48%;
+            box-sizing: border-box;
             background: white;
             padding: 50px;
             border-radius: 24px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            width: 350px;
-            /* Fixed width */
-            height: 512px;
-            /* Fixed height */
             text-align: left;
-            flex-shrink: 0;
-            /* Prevents shrinking */
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            /* Evenly distribute content */
+            margin: 0 1%; /* Gap between cards */
         }
 
         .testimonial-text {
             text-align: center;
-            /* Centers text horizontally */
             font-size: 16px;
             font-weight: 400;
-            line-height: 22.4px;
+            line-height: 140%;
             color: #333;
             flex-grow: 1;
-            /* Makes text take up available space */
             display: flex;
             align-items: center;
-            /* Centers text vertically */
             justify-content: center;
-            /* Centers text horizontally */
-            padding: 0 20px;
-            /* Adds side padding for better readability */
+            padding: 80px 20px;
         }
 
-        /* Align all dividers in the same row */
         .divider {
             border-top: 1px dashed #ccc;
             margin: 0 auto;
-            /* Center the divider */
             width: 80%;
-            /* Uniform width */
         }
 
         .testimonial-name {
@@ -762,42 +748,49 @@
             margin-top: 10px;
         }
 
-        /* Ensure exactly 4 cards per row */
-        @media (min-width: 1800px) {
-            .testimonials {
-                justify-content: space-evenly;
-            }
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 24px;
         }
 
-        @media (max-width: 1799px) {
-            .testimonials {
-                justify-content: center;
-            }
+        .prev { left: 10px; }
+        .next { right: 10px; }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
         }
 
-        /* 2 cards per row on tablets */
-        @media (max-width: 1024px) {
-            .testimonials {
-                flex-wrap: wrap;
-                gap: 20px;
-            }
-
-            .testimonial-card {
-                width: calc(50% - 20px);
-                /* 2 cards per row */
-            }
+        .dot {
+            width: 12px;
+            height: 12px;
+            margin: 0 5px;
+            background: #ccc;
+            border-radius: 50%;
+            cursor: pointer;
         }
 
-        /* 1 card per row on mobile */
+        .dot.active { background: #555; }
+
         @media (max-width: 768px) {
             .testimonials {
-                flex-direction: column;
-                align-items: center;
+                width: 400%;
             }
-
             .testimonial-card {
                 width: 100%;
-                max-width: 450px;
+                margin: 0;
+            }
+            .prev, .next {
+                font-size: 18px;
+                padding: 8px;
             }
         }
 
@@ -1756,35 +1749,37 @@
     </section>
     <div class="container94">
         <h2>Testimonials</h2>
-        <div class="testimonials">
-            <div class="testimonial-card">
-                <p class="testimonial-text">We appreciate the integrity with which they work as a team.</p>
-                <div class="divider"></div>
-                <p class="testimonial-name">Pragati Srivastava</p>
-                <p class="testimonial-role">Founder & CEO, Air Bharath</p>
+        <div class="testimonial-carousel">
+            <div class="testimonials">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">We appreciate the integrity with which they work as a team.</p>
+                    <div class="divider"></div>
+                    <p class="testimonial-name">Pragati Srivastava</p>
+                    <p class="testimonial-role">Founder & CEO, Air Bharath</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">Their team is honest about their capabilities, which is why we're still working with them.</p>
+                    <div class="divider"></div>
+                    <p class="testimonial-name">Sathish K Sankarpandi</p>
+                    <p class="testimonial-role">Chief Technology Officer, VirtTuri</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">Their communication was accurate and always met deadlines.</p>
+                    <div class="divider"></div>
+                    <p class="testimonial-name">Oshri Even Zohar</p>
+                    <p class="testimonial-role">Co-Founder, Motek Medical</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">Gritbyte Labs followed a wonderfully rigorous project management process.</p>
+                    <div class="divider"></div>
+                    <p class="testimonial-name">Maurice L. Harris</p>
+                    <p class="testimonial-role">Co-Founder, Music Experience Platform</p>
+                </div>
             </div>
-            <div class="testimonial-card">
-                <p class="testimonial-text">Their team is honest about their capabilities, which is why we're still
-                    working with them.</p>
-                <div class="divider"></div>
-                <p class="testimonial-name">Sathish K Sankarpandi</p>
-                <p class="testimonial-role">Chief Technology Officer, VirtTuri</p>
-            </div>
-            <div class="testimonial-card">
-                <p class="testimonial-text">Their communication was accurate and always met deadlines.</p>
-                <div class="divider"></div>
-                <p class="testimonial-name">Oshri Even Zohar</p>
-                <p class="testimonial-role">Co-Founder, Motek Medical</p>
-            </div>
-            <div class="testimonial-card">
-                <p class="testimonial-text">Gritbyte Labs followed a wonderfully rigorous project management process.
-                </p>
-                <div class="divider"></div>
-                <p class="testimonial-name">Maurice L. Harris</p>
-                <p class="testimonial-role">Co-Founder, Music Experience Platform</p>
-            </div>
-           
+            <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+            <button class="next" onclick="moveSlide(1)">&#10095;</button>
         </div>
+        <div class="pagination"></div>
     </div>
 
     <div class="containervideo">
@@ -1995,6 +1990,37 @@
             revealOnScroll(); // Run on page load in case elements are already in view
         });
 
+    </script>
+     <script>
+        let index = 0;
+        const slides = document.querySelectorAll(".testimonial-card");
+        const totalSlides = Math.ceil(slides.length / 2);
+        const paginationContainer = document.querySelector(".pagination");
+
+        function updatePagination() {
+            paginationContainer.innerHTML = "";
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement("span");
+                dot.classList.add("dot");
+                dot.onclick = () => moveToSlide(i);
+                if (i === index) dot.classList.add("active");
+                paginationContainer.appendChild(dot);
+            }
+        }
+
+        function moveSlide(step) {
+            index = (index + step + totalSlides) % totalSlides;
+            document.querySelector(".testimonials").style.transform = `translateX(-${index * 50}%)`;
+            updatePagination();
+        }
+
+        function moveToSlide(i) {
+            index = i;
+            document.querySelector(".testimonials").style.transform = `translateX(-${index * 50}%)`;
+            updatePagination();
+        }
+
+        updatePagination();
     </script>
     <script>
         function toggleMenu() {
