@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testimonial Section</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f9f9f9;
+        }
+
+        .testimonials {
+            padding: 5%;
+            background: #f9f9f9;
+            text-align: center;
+        }
+
+        .testimonial-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .testimonial-box p {
+            font-size: 1.2rem;
+            color: #333;
+        }
+
+        .testimonial-box h4 {
+            margin-top: 10px;
+            color: #555;
+        }
+
+        .swiper-button-next,
+        .swiper-button-prev {
+            color: #000000; /* Purple arrows */
+        }
+
+        .swiper-pagination-bullet-active {
+            background: #6a0dad; /* Purple active pagination */
+        }
+    </style>
+</head>
+<body>
+
+    <section class="testimonials">
+        <div class="swiper testimonial-slider">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="testimonial-box">
+                        <p>"Mavin.ai transformed the way we train our healthcare professionals. The AI-powered platform is simply amazing!"</p>
+                        <h4>- John Doe, Medical Trainer</h4>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="testimonial-box">
+                        <p>"The immersive training solutions are a game-changer in medical education. Highly recommend!"</p>
+                        <h4>- Jane Smith, Healthcare Specialist</h4>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="testimonial-box">
+                        <p>"Best training platform we've used. The simulations are incredibly realistic!"</p>
+                        <h4>- Alex Brown, Training Manager</h4>
+                    </div>
+                </div>
+            </div>
+            <!-- Navigation Arrows -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <!-- Pagination -->
+            <div class="swiper-pagination"></div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var swiper = new Swiper(".testimonial-slider", {
+                loop: true,
+                navigation: {
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev",
+                },
+                pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true,
+                },
+                autoplay: {
+                    delay: 4000,
+                },
+            });
+        });
+    </script>
+
+</body>
+</html>
